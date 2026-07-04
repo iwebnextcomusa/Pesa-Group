@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import Header from "./components/Header";
-import Hero from "./components/Hero";
+import Hero from "https://uakg9u0vtibqfzny.public.blob.vercel-storage.com/Animate_storyboard_sequence_Pesa%E2%80%A6_202607042233.mp4";
 import Features from "./components/Features";
 import MediaGallery from "./components/MediaGallery";
 import ThreeDShowcase from "./components/ThreeDShowcase";
