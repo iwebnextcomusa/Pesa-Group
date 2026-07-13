@@ -1,5 +1,6 @@
 import { Shield, Globe, Landmark, Phone, Mail } from "lucide-react";
 import { useLanguage } from "../context/LanguageContext";
+import logoImg from "../assets/images/logo.jpg";
 
 interface FooterProps {
   onNavigate: (path: string) => void;
@@ -19,8 +20,13 @@ export default function Footer({ onNavigate }: FooterProps) {
           {/* Brand Col */}
           <div className="md:col-span-5 space-y-4">
             <div className="flex flex-col items-center md:items-start gap-1.5">
-              <div className="w-9 h-9 rounded bg-blue-600 flex items-center justify-center text-white font-sans font-extrabold text-base shadow shadow-blue-500/20">
-                P
+              <div className="w-12 h-12 rounded-lg bg-white flex items-center justify-center overflow-hidden border border-slate-800 shadow-sm">
+                <img 
+                  src={logoImg} 
+                  alt="PESA Consulting Group Logo" 
+                  className="w-full h-full object-contain p-1"
+                  referrerPolicy="no-referrer"
+                />
               </div>
               <span className="font-sans text-base tracking-wider uppercase text-blue-400 font-bold">
                 {t("PESA Consulting Group")}

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Menu, X, Shield, Globe, ArrowUpRight, ChevronDown } from "lucide-react";
 import { useLanguage } from "../context/LanguageContext";
+import logoImg from "../assets/images/logo.jpg";
 
 interface HeaderProps {
   currentPath: string;
@@ -40,8 +41,13 @@ export default function Header({ currentPath, onNavigate }: HeaderProps) {
             className="flex items-center gap-3 cursor-pointer select-none group"
             id="brand-logo-trigger"
           >
-            <div className="w-10 h-10 rounded-lg bg-[#0A2540] group-hover:bg-blue-600 flex items-center justify-center text-white font-serif font-bold text-lg shadow-sm border border-slate-700/10 transition-colors">
-              P
+            <div className="w-12 h-12 rounded-lg bg-white flex items-center justify-center overflow-hidden border border-slate-200 shadow-sm transition-colors group-hover:border-blue-300">
+              <img 
+                src={logoImg} 
+                alt="PESA Consulting Group Logo" 
+                className="w-full h-full object-contain p-1"
+                referrerPolicy="no-referrer"
+              />
             </div>
             <div className="flex flex-col">
               <span className="font-sans text-base sm:text-lg font-extrabold tracking-tight text-slate-900 uppercase">
