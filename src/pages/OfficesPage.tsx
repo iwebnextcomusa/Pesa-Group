@@ -1,10 +1,12 @@
-import { useState } from "react";
-import { Landmark, Phone, Mail, Clock, Globe, ArrowUpRight, CheckCircle, Shield, Sparkles } from "lucide-react";
+import React, { useState } from "react";
+import { Landmark, Phone, Mail, Clock, Globe, ArrowUpRight, CheckCircle } from "lucide-react";
+import { useLanguage } from "../context/LanguageContext";
 
 export default function OfficesPage() {
+  const { language, t } = useLanguage();
   const [selectedOffice, setSelectedOffice] = useState("dallas");
 
-  const officesList = [
+  const officesList = language === "en" ? [
     {
       id: "dallas",
       city: "Dallas, Texas",
@@ -33,6 +35,35 @@ export default function OfficesPage() {
       lng: 15.2663,
       image: "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&q=80&w=400&h=300"
     }
+  ] : [
+    {
+      id: "dallas",
+      city: "Dallas, Texas",
+      country: "États-Unis",
+      title: "Siège Social International",
+      address: "Preston Road, Dallas, TX 75248",
+      phone: "+1 (682) 424-5857",
+      email: "dallas.desk@pesagroup.org",
+      hours: "Lundi - Vendredi : 08h30 - 17h30 (CST)",
+      responsibilities: ["Présidence & Conseil d'administration", "Infrastructure technologique mondiale", "Trésorerie & Allocations de fonds", "Stratégie d'entreprise & Acquisitions"],
+      lat: 32.7767,
+      lng: -96.7970,
+      image: "https://images.unsplash.com/photo-1549692520-acc6669e2f0c?auto=format&fit=crop&q=80&w=400&h=300"
+    },
+    {
+      id: "kinshasa",
+      city: "Kinshasa",
+      country: "République Démocratique du Congo (RDC)",
+      title: "Bureau Opérationnel National",
+      address: "Avenue de l'Equateur, Gombe, Kinshasa",
+      phone: "+243 821 368 004",
+      email: "kinshasa.desk@pesagroup.org",
+      hours: "Lundi - Vendredi : 08h30 - 17h30 (WAT)",
+      responsibilities: ["Contrats d'audit & Conformité", "Marketing stratégique régional", "Logistique d'approvisionnement minier", "Gestion des sous-traitants locaux"],
+      lat: -4.4419,
+      lng: 15.2663,
+      image: "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&q=80&w=400&h=300"
+    }
   ];
 
   const currentOffice = officesList.find(o => o.id === selectedOffice) || officesList[0];
@@ -45,14 +76,16 @@ export default function OfficesPage() {
         <div className="absolute inset-0 bg-radial from-blue-900/15 via-transparent to-transparent pointer-events-none"></div>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10 space-y-4">
           <span className="text-xs font-mono uppercase tracking-widest text-blue-400 font-bold">
-            Administrative Channels
+            {t("Administrative Channels")}
           </span>
           <h1 className="font-sans text-3xl sm:text-5xl font-extrabold tracking-tight">
-            Our Global Office Locations
+            {language === "en" ? "Our Global Office Locations" : "Nos Bureaux à l'International"}
           </h1>
           <div className="w-12 h-[1.5px] bg-blue-500 mx-auto mt-2"></div>
           <p className="text-slate-300 text-xs sm:text-sm max-w-2xl mx-auto leading-relaxed">
-            PESA Consulting operates seamlessly across North America and Central Africa, structuring local audits, capital programs, and ethical supply-chain models.
+            {language === "en"
+              ? "PESA Consulting operates seamlessly across North America and Central Africa, structuring local audits, capital programs, and ethical supply-chain models."
+              : "PESA Group opère de manière fluide en Amérique du Nord et en Afrique centrale, structurant des audits locaux, des programmes financiers et des modèles d'approvisionnement éthiques."}
           </p>
         </div>
       </section>
@@ -65,7 +98,7 @@ export default function OfficesPage() {
             {/* Left Column: Office Selector Cards (5 Cols) */}
             <div className="lg:col-span-5 space-y-4" id="offices-list">
               <h4 className="font-sans text-xs font-mono uppercase tracking-widest text-slate-400 font-extrabold border-b border-slate-200 pb-3 block mb-4">
-                Office Directories
+                {language === "en" ? "Office Directories" : "Répertoires des Bureaux"}
               </h4>
 
               <div className="flex flex-col gap-4">
@@ -109,10 +142,12 @@ export default function OfficesPage() {
 
               {/* Strict cashless wire instruction */}
               <div className="bg-slate-900 text-white p-5 rounded-xl border border-slate-800 space-y-2 shadow-md">
-                <span className="font-mono text-[9px] uppercase tracking-widest text-blue-300 font-bold block">PESA Financial Security</span>
-                <h5 className="font-sans text-xs font-bold leading-snug text-white">Direct Wire Transfer Compliance</h5>
+                <span className="font-mono text-[9px] uppercase tracking-widest text-blue-300 font-bold block">{t("PESA Financial Security")}</span>
+                <h5 className="font-sans text-xs font-bold leading-snug text-white">{language === "en" ? "Direct Wire Transfer Compliance" : "Conformité des virements bancaires"}</h5>
                 <p className="text-slate-400 text-[10px] leading-relaxed font-sans">
-                  PESA Group enforces strict compliance protocols. Bank coordinates are released solely through certified channels to prevent transaction interception. Under no circumstances should cash payments be delivered to any global representative.
+                  {language === "en"
+                    ? "PESA Group enforces strict compliance protocols. Bank coordinates are released solely through certified channels to prevent transaction interception. Under no circumstances should cash payments be delivered to any global representative."
+                    : "Le Groupe PESA applique des protocoles de conformité stricts. Les coordonnées bancaires sont transmises uniquement via des canaux sécurisés certifiés. En aucun cas des paiements en espèces ne doivent être remis à nos représentants."}
                 </p>
               </div>
             </div>
@@ -133,7 +168,7 @@ export default function OfficesPage() {
                       {currentOffice.country}
                     </span>
                     <h3 className="font-sans text-xl font-bold leading-none">
-                      {currentOffice.city} Office Suite
+                      {language === "en" ? `${currentOffice.city} Office Suite` : `Bureau de ${currentOffice.city}`}
                     </h3>
                   </div>
                 </div>
@@ -143,7 +178,7 @@ export default function OfficesPage() {
                   
                   <div className="space-y-3">
                     <h5 className="text-xs uppercase font-mono tracking-widest text-slate-400 font-bold">
-                      Contact Information
+                      {language === "en" ? "Contact Information" : "Coordonnées de Contact"}
                     </h5>
                     
                     <div className="space-y-2">
@@ -166,7 +201,7 @@ export default function OfficesPage() {
 
                   <div className="space-y-3">
                     <h5 className="text-xs uppercase font-mono tracking-widest text-slate-400 font-bold">
-                      Designated Portfolios
+                      {language === "en" ? "Designated Portfolios" : "Portefeuilles Assignés"}
                     </h5>
                     
                     <div className="space-y-1.5">
@@ -184,7 +219,7 @@ export default function OfficesPage() {
                 {/* Google Maps Mock Widget */}
                 <div className="pt-6 border-t border-slate-100 space-y-3">
                   <h5 className="text-xs uppercase font-mono tracking-widest text-slate-400 font-bold">
-                    Interactive Location Map
+                    {language === "en" ? "Interactive Location Map" : "Carte Interactive de Localisation"}
                   </h5>
 
                   <div className="relative h-64 bg-slate-900 rounded-xl overflow-hidden border border-slate-800 flex items-center justify-center text-center p-6" id="interactive-office-maps-widget">
@@ -199,10 +234,14 @@ export default function OfficesPage() {
                         <span>Lat: {currentOffice.lat} // Lng: {currentOffice.lng}</span>
                       </div>
                       
-                      <h4 className="text-white font-sans text-sm font-bold tracking-tight">PESA {currentOffice.city} Node Active</h4>
+                      <h4 className="text-white font-sans text-sm font-bold tracking-tight">
+                        {language === "en" ? `PESA ${currentOffice.city} Node Active` : `Nœud PESA ${currentOffice.city} Actif`}
+                      </h4>
                       
                       <p className="text-slate-400 text-xs font-sans">
-                        Google Maps API is configured securely for this administrative domain. Submitting standard coordinate frames via our Dallas tech rail.
+                        {language === "en"
+                          ? "Google Maps API is configured securely for this administrative domain. Submitting standard coordinate frames via our Dallas tech rail."
+                          : "L'API Google Maps est configurée de manière sécurisée pour ce domaine administratif. Transmission des coordonnées de géolocalisation en cours."}
                       </p>
 
                       <a 
@@ -212,7 +251,7 @@ export default function OfficesPage() {
                         className="inline-flex items-center gap-1.5 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white font-sans font-bold text-xs rounded shadow transition-colors"
                         id={`map-link-${currentOffice.id}`}
                       >
-                        <span>Open in Google Maps</span>
+                        <span>{language === "en" ? "Open in Google Maps" : "Ouvrir dans Google Maps"}</span>
                         <ArrowUpRight className="w-3.5 h-3.5" />
                       </a>
                     </div>

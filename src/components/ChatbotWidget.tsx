@@ -1,9 +1,11 @@
 import React, { useState, useRef, useEffect } from "react";
 import { MessageSquare, X, Send, HelpCircle, ArrowUpRight, ShieldCheck } from "lucide-react";
 import { ChatMessage } from "../types";
+import { useLanguage } from "../context/LanguageContext";
 
 export default function ChatbotWidget() {
   const [isOpen, setIsOpen] = useState(false);
+  const { language, t } = useLanguage();
   const [messages, setMessages] = useState<ChatMessage[]>([
     {
       id: "welcome",
@@ -15,6 +17,17 @@ export default function ChatbotWidget() {
   const [inputValue, setInputValue] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
+
+  // Synchronize first welcome message when language changes
+  useEffect(() => {
+    setMessages(prev => 
+      prev.map(msg => 
+        msg.id === "welcome"
+          ? { ...msg, content: t("Welcome to PESA Consulting Group's digital headquarters. I am your Executive Ambassador, trained on PESA's verified services and global operations under CEO Camy Likobe. \n\nHow may I assist you with Strategy Consulting, Luxury Real Estate listings, Land development, Private Jet sales, US Visa services, or Mining inquiries today?") }
+          : msg
+      )
+    );
+  }, [language]);
 
   // Auto-scroll to bottom of chat
   useEffect(() => {
@@ -107,10 +120,10 @@ export default function ChatbotWidget() {
                 P
               </div>
               <div>
-                <h4 className="font-sans text-sm font-bold tracking-wide text-blue-300">PESA Ambassador</h4>
+                <h4 className="font-sans text-sm font-bold tracking-wide text-blue-300">{t("PESA Ambassador")}</h4>
                 <div className="flex items-center gap-1.5">
                   <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-                  <p className="text-[10px] text-slate-300 uppercase tracking-widest font-mono">Secure AI Portal</p>
+                  <p className="text-[10px] text-slate-300 uppercase tracking-widest font-mono">{t("Secure AI Portal")}</p>
                 </div>
               </div>
             </div>
@@ -126,7 +139,7 @@ export default function ChatbotWidget() {
           {/* Secure disclaimer */}
           <div className="bg-slate-50 border-b border-slate-100 px-3 py-1.5 flex items-center justify-center gap-1.5 text-[10px] text-slate-500 font-mono">
             <ShieldCheck className="w-3.5 h-3.5 text-emerald-600" />
-            <span>End-to-End Encrypted Secure Server Link</span>
+            <span>{t("End-to-End Encrypted Secure Server Link")}</span>
           </div>
 
           {/* Message History */}
@@ -163,7 +176,7 @@ export default function ChatbotWidget() {
           {/* Suggested Prompts panel (Quick assists) */}
           {messages.length === 1 && (
             <div className="px-4 py-2 bg-slate-50 border-t border-slate-100 flex flex-col gap-1.5">
-              <p className="text-[10px] text-slate-400 font-mono uppercase tracking-wider">Suggested Inquiries:</p>
+              <p className="text-[10px] text-slate-400 font-mono uppercase tracking-wider">{t("Suggested Inquiries:")}</p>
               <div className="flex flex-wrap gap-1.5">
                 {[
                   "Who is CEO Camy Likobe?",
@@ -175,7 +188,7 @@ export default function ChatbotWidget() {
                     onClick={() => selectSuggestedPrompt(promptText)}
                     className="text-[11px] text-slate-600 bg-white border border-slate-200 hover:border-blue-400 px-2.5 py-1 rounded-full text-left transition-colors flex items-center gap-1 font-sans"
                   >
-                    <span>{promptText}</span>
+                    <span>{t(promptText)}</span>
                     <ArrowUpRight className="w-2.5 h-2.5 text-slate-400" />
                   </button>
                 ))}
@@ -192,7 +205,7 @@ export default function ChatbotWidget() {
               type="text"
               value={inputValue}
               onChange={(e) => setInputValue(e.target.value)}
-              placeholder="Ask about PESA services, team..."
+              placeholder={t("Ask about PESA services, team...")}
               className="flex-1 bg-slate-50 hover:bg-slate-100/50 focus:bg-white border border-slate-200 rounded-full px-4 py-2 text-xs text-slate-800 focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500 transition-all font-sans"
               id="chatbot-input-field"
             />

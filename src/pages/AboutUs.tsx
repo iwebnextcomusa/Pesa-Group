@@ -1,14 +1,18 @@
+import React from "react";
 import { 
   Award, Shield, Users, Globe, BookOpen, Target, Landmark, 
   TrendingUp, CheckCircle, ArrowRight, Briefcase, Mail, Phone, ExternalLink 
 } from "lucide-react";
+import { useLanguage } from "../context/LanguageContext";
 
 interface AboutUsProps {
   onNavigate: (path: string) => void;
 }
 
 export default function AboutUs({ onNavigate }: AboutUsProps) {
-  const coreValues = [
+  const { language, t } = useLanguage();
+
+  const coreValues = language === "en" ? [
     {
       title: "Rigor & Absolute Execution",
       desc: "Our business operations are built strictly on high-quality delivery, adherence to tight deadlines, and absolute structural precision. Personal affinities are set aside to prioritize pure project success.",
@@ -29,13 +33,39 @@ export default function AboutUs({ onNavigate }: AboutUsProps) {
       desc: "We leverage a lean administrative team spanning Dallas and Kinshasa, combining North American technical infrastructures with local African market expertise.",
       icon: Globe
     }
+  ] : [
+    {
+      title: "Rigueur & Exécution Absolue",
+      desc: "Nos opérations commerciales sont basées sur une qualité de livraison stricte, le respect rigoureux des délais et une précision structurelle absolue. Les affinités personnelles sont exclues pour garantir le succès des projets.",
+      icon: Shield
+    },
+    {
+      title: "Conformité Zéro-Cash",
+      desc: "Afin de garantir une transparence totale et d'éliminer tout risque, PESA interdit formellement les transactions en espèces. Toutes les opérations s'effectuent par virements bancaires sécurisés.",
+      icon: Landmark
+    },
+    {
+      title: "Vision Stratégique à Long Terme",
+      desc: "Nous privilégions l'acquisition de contrats de services à long terme (minimum 5 ans) pour assurer un développement durable et une croissance stable de la communauté.",
+      icon: TrendingUp
+    },
+    {
+      title: "Synergie Globale",
+      desc: "Nous exploitons une structure administrative agile entre Dallas et Kinshasa, alliant les infrastructures technologiques américaines à l'expertise approfondie du marché africain.",
+      icon: Globe
+    }
   ];
 
-  const milestones = [
+  const milestones = language === "en" ? [
     { year: "2016", title: "Founding in Texas", desc: "PESA Consulting began as a boutique capital modeling and strategic advisory office in Dallas, Texas, specializing in cross-border partnerships." },
     { year: "2019", title: "Global Expansion", desc: "Established administrative presence in Kinshasa, DRC, facilitating ethical supply chains and international visa pathways." },
     { year: "2022", title: "Structured Funds Milestones", desc: "Revisions to our corporate models reached a record 300+ active investors across multiple sponsored capital programs." },
     { year: "2026", title: "New Service Division Launch", desc: "Officially launched PESA's dedicated Operations Support, Financial Auditing, and Venture Outsourcing Division to secure long-term global contracts." }
+  ] : [
+    { year: "2016", title: "Fondation au Texas", desc: "PESA Consulting a débuté comme bureau spécialisé en modélisation de capital et conseil stratégique à Dallas, au Texas, axé sur les partenariats transfrontaliers." },
+    { year: "2019", title: "Expansion Globale", desc: "Établissement d'une présence administrative à Kinshasa, RDC, facilitant les chaînes d'approvisionnement éthiques et les parcours de visa internationaux." },
+    { year: "2022", title: "Jalons de Fonds Structurés", desc: "Les révisions de nos modèles d'investissement ont atteint un record de plus de 300 investisseurs actifs à travers divers programmes de parrainage." },
+    { year: "2026", title: "Lancement de la Division Services", desc: "Lancement officiel de la division dédiée au soutien opérationnel, à l'audit financier et à l'externalisation de projets pour garantir des contrats mondiaux à long terme." }
   ];
 
   return (
@@ -46,14 +76,16 @@ export default function AboutUs({ onNavigate }: AboutUsProps) {
         <div className="absolute inset-0 bg-radial from-blue-900/15 via-transparent to-transparent pointer-events-none"></div>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10 space-y-4">
           <span className="text-xs font-mono uppercase tracking-widest text-blue-400 font-bold">
-            Corporate Identity
+            {t("Corporate Identity")}
           </span>
           <h1 className="font-sans text-3xl sm:text-5xl font-extrabold tracking-tight">
-            About PESA Consulting Group
+            {t("About PESA Consulting Group")}
           </h1>
           <div className="w-12 h-[1.5px] bg-blue-500 mx-auto mt-2"></div>
           <p className="text-slate-300 text-xs sm:text-sm max-w-2xl mx-auto leading-relaxed">
-            Discover our history, strategic methodologies, core corporate tenets, and the leadership directing PESA's multi-national consulting ecosystem.
+            {language === "en" 
+              ? "Discover our history, strategic methodologies, core corporate tenets, and the leadership directing PESA's multi-national consulting ecosystem."
+              : "Découvrez notre histoire, nos méthodologies stratégiques, nos principes fondamentaux et la direction qui guide l'écosystème de conseil multinational de PESA."}
           </p>
         </div>
       </section>
@@ -65,18 +97,22 @@ export default function AboutUs({ onNavigate }: AboutUsProps) {
             
             <div className="lg:col-span-7 space-y-6">
               <div className="space-y-1">
-                <span className="text-[10px] font-mono uppercase tracking-widest text-blue-600 font-bold">Strategic Background</span>
+                <span className="text-[10px] font-mono uppercase tracking-widest text-blue-600 font-bold">{t("Strategic Background")}</span>
                 <h2 className="font-sans text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
-                  A Legacy of Purpose-Driven Business Solutions
+                  {language === "en" ? "A Legacy of Purpose-Driven Business Solutions" : "Un Héritage de Solutions d'Affaires Orientées vers un But"}
                 </h2>
               </div>
               
               <p className="text-slate-600 text-xs sm:text-sm leading-relaxed font-sans">
-                PESA Consulting Group operates as an elite corporate advisory and management consulting firm. Established to assist individual and institutional clients through high-impact transactions, we maintain critical divisions across Strategy Consulting, Enterprise Technology Modernization, Human Capital Acquisition, and Supply-Chain Security.
+                {language === "en"
+                  ? "PESA Consulting Group operates as an elite corporate advisory and management consulting firm. Established to assist individual and institutional clients through high-impact transactions, we maintain critical divisions across Strategy Consulting, Enterprise Technology Modernization, Human Capital Acquisition, and Supply-Chain Security."
+                  : "Le groupe PESA Consulting opère en tant que cabinet d'élite de conseil d'entreprise et de gestion. Établi pour assister nos clients individuels et institutionnels dans des transactions à fort impact, nous gérons des divisions clés de conseil en stratégie, modernisation technologique, acquisition de capital humain et conformité logistique."}
               </p>
 
               <p className="text-slate-600 text-xs sm:text-sm leading-relaxed font-sans">
-                Our organization is distinguished by its operational rigor. We believe that professional deliverables must be held to the highest standards of timeliness and execution, separate from personal affinities or friendships. This commitment has enabled us to achieve a 100% success rate across our global academic and investment programs.
+                {language === "en"
+                  ? "Our organization is distinguished by its operational rigor. We believe that professional deliverables must be held to the highest standards of timeliness and execution, separate from personal affinities or friendships. This commitment has enabled us to achieve a 100% success rate across our global academic and investment programs."
+                  : "Notre organisation se distingue par sa rigueur opérationnelle. Nous sommes convaincus que les livrables professionnels doivent respecter les normes de ponctualité et d'exécution les plus élevées, en dehors de toute affinité personnelle ou amitié. Cet engagement nous a permis d'atteindre un taux de réussite de 100 % dans l'ensemble de nos programmes mondiaux d'études et d'investissement."}
               </p>
 
               {/* Mission / Vision Box */}
@@ -84,20 +120,24 @@ export default function AboutUs({ onNavigate }: AboutUsProps) {
                 <div className="space-y-2">
                   <span className="text-[10px] font-mono text-blue-600 uppercase tracking-widest font-extrabold flex items-center gap-1.5">
                     <Target className="w-3.5 h-3.5" />
-                    <span>Our Strategic Mission</span>
+                    <span>{language === "en" ? "Our Strategic Mission" : "Notre Mission Stratégique"}</span>
                   </span>
                   <p className="text-xs text-slate-600 leading-relaxed font-sans">
-                    To deliver absolute execution rigor and customized structural blueprints that elevate the efficiency, compliance, and valuation of our partner enterprises globally.
+                    {language === "en"
+                      ? "To deliver absolute execution rigor and customized structural blueprints that elevate the efficiency, compliance, and valuation of our partner enterprises globally."
+                      : "Fournir une rigueur d'exécution absolue et des plans structurels sur mesure qui améliorent l'efficacité, la conformité et la valorisation de nos entreprises partenaires dans le monde."}
                   </p>
                 </div>
                 
                 <div className="space-y-2">
                   <span className="text-[10px] font-mono text-blue-600 uppercase tracking-widest font-extrabold flex items-center gap-1.5">
                     <BookOpen className="w-3.5 h-3.5" />
-                    <span>Our Global Vision</span>
+                    <span>{language === "en" ? "Our Global Vision" : "Notre Vision Globale"}</span>
                   </span>
                   <p className="text-xs text-slate-600 leading-relaxed font-sans">
-                    To standardize multi-national corporate development by deploying the proprietary PESA Methodology, connecting high-growth frontier markets with secure institutional capital.
+                    {language === "en"
+                      ? "To standardize multi-national corporate development by deploying the proprietary PESA Methodology, connecting high-growth frontier markets with secure institutional capital."
+                      : "Standardiser le développement d'entreprise multinational en déployant la méthodologie exclusive PESA, reliant les marchés frontières à forte croissance à un capital institutionnel sécurisé."}
                   </p>
                 </div>
               </div>
@@ -112,7 +152,7 @@ export default function AboutUs({ onNavigate }: AboutUsProps) {
                 />
               </div>
               <div className="absolute -top-4 -left-4 bg-[#0A2540] text-blue-300 font-mono text-[10px] uppercase tracking-widest px-4 py-2 rounded-lg border border-slate-800 shadow-md">
-                Corporate Headquarters
+                {t("Corporate Headquarters")}
               </div>
             </div>
 
@@ -125,8 +165,8 @@ export default function AboutUs({ onNavigate }: AboutUsProps) {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           
           <div className="text-center max-w-3xl mx-auto mb-16">
-            <span className="text-[10px] font-mono text-blue-400 uppercase tracking-widest font-bold">Strategic Pillars</span>
-            <h2 className="font-sans text-2xl sm:text-3xl font-extrabold tracking-tight mt-1">Our Core Values & Compliance Standards</h2>
+            <span className="text-[10px] font-mono text-blue-400 uppercase tracking-widest font-bold">{t("Strategic Pillars")}</span>
+            <h2 className="font-sans text-2xl sm:text-3xl font-extrabold tracking-tight mt-1">{language === "en" ? "Our Core Values & Compliance Standards" : "Nos Valeurs Fondamentales & Normes de Conformité"}</h2>
             <div className="w-12 h-[1.5px] bg-blue-500 mx-auto mt-3"></div>
           </div>
 
@@ -156,8 +196,8 @@ export default function AboutUs({ onNavigate }: AboutUsProps) {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           
           <div className="text-center max-w-3xl mx-auto mb-16">
-            <span className="text-[10px] font-mono text-blue-600 uppercase tracking-widest font-bold">Our Journey</span>
-            <h2 className="font-sans text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight mt-1">PESA Group Milestones</h2>
+            <span className="text-[10px] font-mono text-blue-600 uppercase tracking-widest font-bold">{t("Our Journey")}</span>
+            <h2 className="font-sans text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight mt-1">{language === "en" ? "PESA Group Milestones" : "Jalons du Groupe PESA"}</h2>
             <div className="w-12 h-[1.5px] bg-blue-600 mx-auto mt-3"></div>
           </div>
 
@@ -187,28 +227,38 @@ export default function AboutUs({ onNavigate }: AboutUsProps) {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
             
             <div className="lg:col-span-6 space-y-6">
-              <span className="text-[10px] font-mono text-blue-600 uppercase tracking-widest font-bold block">International Reach</span>
+              <span className="text-[10px] font-mono text-blue-600 uppercase tracking-widest font-bold block">{t("International Reach")}</span>
               <h3 className="font-sans text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
-                Our Strategic Global Presence
+                {language === "en" ? "Our Strategic Global Presence" : "Notre Présence Globale Stratégique"}
               </h3>
               <p className="text-slate-600 text-xs sm:text-sm leading-relaxed font-sans">
-                PESA Consulting Group utilizes a highly structured, dual-hub operational framework designed to support international trade, capital structuring, and corporate upskilling.
+                {language === "en"
+                  ? "PESA Consulting Group utilizes a highly structured, dual-hub operational framework designed to support international trade, capital structuring, and corporate upskilling."
+                  : "Le groupe PESA Consulting utilise un cadre opérationnel hautement structuré à double pôle, conçu pour soutenir le commerce international, la structuration du capital et le renforcement des compétences d'entreprise."}
               </p>
               
               <div className="space-y-4 font-sans text-xs">
                 <div className="flex items-start gap-3">
                   <CheckCircle className="w-4 h-4 text-blue-600 shrink-0 mt-0.5" />
                   <div>
-                    <strong className="text-slate-900">USA Executive Hub (Dallas, Texas):</strong>
-                    <p className="text-slate-500 mt-0.5">Directs global technology infrastructures, financial auditing standards, corporate legal compliance, and field marketing.</p>
+                    <strong className="text-slate-900">{language === "en" ? "USA Executive Hub (Dallas, Texas):" : "Pôle Exécutif USA (Dallas, Texas) :"}</strong>
+                    <p className="text-slate-500 mt-0.5">
+                      {language === "en"
+                        ? "Directs global technology infrastructures, financial auditing standards, corporate legal compliance, and field marketing."
+                        : "Dirige les infrastructures technologiques mondiales, les normes d'audit financier, la conformité légale et le marketing de terrain."}
+                    </p>
                   </div>
                 </div>
 
                 <div className="flex items-start gap-3">
                   <CheckCircle className="w-4 h-4 text-blue-600 shrink-0 mt-0.5" />
                   <div>
-                    <strong className="text-slate-900">Central Africa Hub (Kinshasa, DRC):</strong>
-                    <p className="text-slate-500 mt-0.5">Coordinates localized auditing contracts, mineral supply logistics compliance, regional strategic marketing, and local workforce operations.</p>
+                    <strong className="text-slate-900">{language === "en" ? "Central Africa Hub (Kinshasa, DRC):" : "Pôle Afrique Centrale (Kinshasa, RDC) :"}</strong>
+                    <p className="text-slate-500 mt-0.5">
+                      {language === "en"
+                        ? "Coordinates localized auditing contracts, mineral supply logistics compliance, regional strategic marketing, and local workforce operations."
+                        : "Coordonne les contrats d'audit locaux, la conformité logistique pour les minerais, le marketing stratégique régional et l'encadrement des équipes locales."}
+                    </p>
                   </div>
                 </div>
               </div>
@@ -219,7 +269,7 @@ export default function AboutUs({ onNavigate }: AboutUsProps) {
                   className="px-5 py-2.5 bg-[#0A2540] hover:bg-slate-800 text-white font-sans font-bold text-xs uppercase tracking-wider rounded-lg shadow transition-colors cursor-pointer"
                   id="about-view-offices-btn"
                 >
-                  Explore Our Offices
+                  {language === "en" ? "Explore Our Offices" : "Explorer nos Bureaux"}
                 </button>
                 
                 <button
@@ -227,7 +277,7 @@ export default function AboutUs({ onNavigate }: AboutUsProps) {
                   className="px-5 py-2.5 border border-slate-300 hover:border-[#0A2540] text-slate-700 font-sans font-bold text-xs uppercase tracking-wider rounded-lg transition-colors cursor-pointer"
                   id="about-view-team-btn"
                 >
-                  Meet Our Executive Team
+                  {language === "en" ? "Meet Our Executive Team" : "Rencontrer notre Équipe"}
                 </button>
               </div>
             </div>
@@ -240,24 +290,26 @@ export default function AboutUs({ onNavigate }: AboutUsProps) {
                 <div className="space-y-4 relative z-10">
                   <div className="flex items-center gap-2">
                     <Globe className="w-5 h-5 text-blue-400" />
-                    <span className="font-mono text-xs uppercase tracking-widest text-blue-300 font-bold">Secure Global Channels</span>
+                    <span className="font-mono text-xs uppercase tracking-widest text-blue-300 font-bold">{language === "en" ? "Secure Global Channels" : "Canaux Globaux Sécurisés"}</span>
                   </div>
 
-                  <h4 className="font-sans text-lg font-bold">Dallas // Kinshasa Bilateral Synergy</h4>
+                  <h4 className="font-sans text-lg font-bold">{language === "en" ? "Dallas // Kinshasa Bilateral Synergy" : "Synergie Bilatérale Dallas // Kinshasa"}</h4>
                   <p className="text-slate-300 text-xs leading-relaxed font-sans">
-                    By structuring operations to distribute technical oversight to Dallas and localized physical tasks to qualified sub-contractors in Kinshasa, PESA Group maximizes efficiency while complying with regional tax laws and employment statutes.
+                    {language === "en"
+                      ? "By structuring operations to distribute technical oversight to Dallas and localized physical tasks to qualified sub-contractors in Kinshasa, PESA Group maximizes efficiency while complying with regional tax laws and employment statutes."
+                      : "En structurant les opérations de manière à confier la supervision technique à Dallas et les tâches physiques locales à des sous-traitants qualifiés à Kinshasa, le groupe PESA maximise l'efficacité tout en respectant les lois fiscales et d'emploi régionales."}
                   </p>
 
                   <div className="pt-4 border-t border-slate-800 grid grid-cols-2 gap-4 text-xs font-mono">
                     <div>
-                      <span className="text-slate-400 block uppercase">US Channels</span>
-                      <span className="text-white font-bold block mt-1">Dallas Corporate</span>
+                      <span className="text-slate-400 block uppercase font-bold">{language === "en" ? "US Channels" : "Canaux US"}</span>
+                      <span className="text-white font-bold block mt-1">{language === "en" ? "Dallas Corporate" : "Siège de Dallas"}</span>
                       <span className="text-blue-400 block text-[10px]">+1 (682) 424-5857</span>
                     </div>
 
                     <div>
-                      <span className="text-slate-400 block uppercase">Africa Channels</span>
-                      <span className="text-white font-bold block mt-1">Kinshasa Operations</span>
+                      <span className="text-slate-400 block uppercase font-bold">{language === "en" ? "Africa Channels" : "Canaux Afrique"}</span>
+                      <span className="text-white font-bold block mt-1">{language === "en" ? "Kinshasa Operations" : "Opérations Kinshasa"}</span>
                       <span className="text-blue-400 block text-[10px]">+243 821 368 004</span>
                     </div>
                   </div>

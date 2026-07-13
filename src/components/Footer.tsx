@@ -1,4 +1,5 @@
 import { Shield, Globe, Landmark, Phone, Mail } from "lucide-react";
+import { useLanguage } from "../context/LanguageContext";
 
 interface FooterProps {
   onNavigate: (path: string) => void;
@@ -6,6 +7,7 @@ interface FooterProps {
 
 export default function Footer({ onNavigate }: FooterProps) {
   const currentYear = new Date().getFullYear();
+  const { language, setLanguage, t } = useLanguage();
 
   return (
     <footer className="bg-slate-950 text-white pt-16 pb-12 border-t border-slate-800" id="app-footer">
@@ -21,32 +23,32 @@ export default function Footer({ onNavigate }: FooterProps) {
                 P
               </div>
               <span className="font-sans text-base tracking-wider uppercase text-blue-400 font-bold">
-                PESA Consulting Group
+                {t("PESA Consulting Group")}
               </span>
               <p className="text-[10px] text-slate-400 font-mono tracking-widest uppercase">
-                PESA Consulting Group LLC
+                {t("PESA Consulting Group LLC")}
               </p>
             </div>
             
             <p className="text-slate-400 text-xs leading-relaxed max-w-sm mx-auto md:mx-0 font-sans">
-              An elite multinational advisory firm delivering absolute execution rigor across North America and Central Africa.
+              {t("An elite multinational advisory firm delivering absolute execution rigor across North America and Central Africa.")}
             </p>
 
             <div className="space-y-1.5 font-mono text-[10px] text-slate-400">
               <p className="flex items-center justify-center md:justify-start gap-2">
                 <Phone className="w-3.5 h-3.5 text-blue-500" />
-                <span>Dallas Desk: +1 (682) 424-5857</span>
+                <span>{t("Dallas Desk: +1 (682) 424-5857")}</span>
               </p>
               <p className="flex items-center justify-center md:justify-start gap-2">
                 <Phone className="w-3.5 h-3.5 text-blue-500" />
-                <span>Kinshasa Desk: +243 821 368 004</span>
+                <span>{t("Kinshasa Desk: +243 821 368 004")}</span>
               </p>
             </div>
           </div>
 
           {/* Navigation Col */}
           <div className="md:col-span-3 space-y-3">
-            <h5 className="text-xs uppercase font-mono tracking-widest text-blue-400 font-extrabold">Corporate Index</h5>
+            <h5 className="text-xs uppercase font-mono tracking-widest text-blue-400 font-extrabold">{t("Corporate Index")}</h5>
             <ul className="space-y-2 font-sans text-xs">
               {[
                 { path: "/", label: "Home Base" },
@@ -62,7 +64,7 @@ export default function Footer({ onNavigate }: FooterProps) {
                     onClick={() => onNavigate(link.path)}
                     className="text-slate-400 hover:text-white transition-colors cursor-pointer text-xs"
                   >
-                    {link.label}
+                    {t(link.label)}
                   </button>
                 </li>
               ))}
@@ -71,7 +73,7 @@ export default function Footer({ onNavigate }: FooterProps) {
 
           {/* Selected Divisions Col */}
           <div className="md:col-span-4 space-y-3">
-            <h5 className="text-xs uppercase font-mono tracking-widest text-blue-400 font-extrabold">Advisory Desk</h5>
+            <h5 className="text-xs uppercase font-mono tracking-widest text-blue-400 font-extrabold">{t("Advisory Desk")}</h5>
             <ul className="space-y-2 font-sans text-xs">
               {[
                 { id: "strategy-consulting", title: "Strategy Consulting" },
@@ -86,7 +88,7 @@ export default function Footer({ onNavigate }: FooterProps) {
                     onClick={() => onNavigate(`/services/${srv.id}`)}
                     className="text-slate-400 hover:text-white transition-colors text-xs cursor-pointer truncate max-w-xs block mx-auto md:mx-0"
                   >
-                    {srv.title}
+                    {t(srv.title)}
                   </button>
                 </li>
               ))}
@@ -97,19 +99,35 @@ export default function Footer({ onNavigate }: FooterProps) {
 
         {/* Global disclaimer on corporate operations */}
         <p className="text-slate-500 text-[10px] leading-relaxed max-w-4xl mx-auto text-center font-sans border-t border-slate-900 pt-8">
-          PESA Consulting Group LLC is an independent global consulting firm. Operational support, technical auditing, and strategic outsourcing solutions adhere to local legal, tax, and licensing frameworks in the Democratic Republic of Congo and the State of Texas. PESA maintains a strict zero-cash payment policy.
+          {t("PESA Consulting Group LLC is an independent global consulting firm. Operational support, technical auditing, and strategic outsourcing solutions adhere to local legal, tax, and licensing frameworks in the Democratic Republic of Congo and the State of Texas. PESA maintains a strict zero-cash payment policy.")}
         </p>
 
-        {/* Development attribution + copyright block */}
-        <div className="pt-8 border-t border-slate-900 flex flex-col items-center gap-3 text-center">
+        {/* Development attribution + copyright block + Language option */}
+        <div className="pt-8 border-t border-slate-900 flex flex-col items-center gap-4 text-center">
           <div className="flex items-center gap-2 text-[10px] text-slate-500 font-mono uppercase tracking-widest">
             <Shield className="w-3.5 h-3.5 text-blue-500 animate-pulse" />
             <span>© {currentYear} PESA Consulting Group. All Rights Reserved.</span>
           </div>
 
-          <p className="text-slate-300 text-xs font-mono">
-            Developed by <a href="https://iwebnext.com" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-blue-500 underline transition-colors font-bold">iWebNext</a>
-          </p>
+          {/* Quick translator selector in Footer */}
+          <div className="flex items-center gap-3">
+            <span className="text-slate-500 font-mono text-[10px] uppercase tracking-wider">{t("Developed by")} <a href="https://iwebnext.com" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-blue-500 underline transition-colors font-bold">iWebNext</a></span>
+            <span className="text-slate-800">|</span>
+            <div className="flex items-center bg-slate-900 p-0.5 rounded border border-slate-800" id="footer-lang-selector">
+              <button 
+                onClick={() => setLanguage('en')}
+                className={`px-2 py-0.5 text-[9px] font-mono font-bold rounded transition-all cursor-pointer ${language === 'en' ? 'bg-slate-800 text-blue-400 shadow-sm' : 'text-slate-600 hover:text-slate-400'}`}
+              >
+                EN
+              </button>
+              <button 
+                onClick={() => setLanguage('fr')}
+                className={`px-2 py-0.5 text-[9px] font-mono font-bold rounded transition-all cursor-pointer ${language === 'fr' ? 'bg-slate-800 text-blue-400 shadow-sm' : 'text-slate-600 hover:text-slate-400'}`}
+              >
+                FR
+              </button>
+            </div>
+          </div>
         </div>
 
       </div>

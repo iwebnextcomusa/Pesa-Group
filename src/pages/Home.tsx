@@ -6,12 +6,14 @@ import {
   Clock, ShieldAlert, Star, Mail, ArrowUpRight, Check
 } from "lucide-react";
 import { servicesDetailList } from "../servicesData";
+import { useLanguage } from "../context/LanguageContext";
 
 interface HomeProps {
   onNavigate: (path: string) => void;
 }
 
 export default function Home({ onNavigate }: HomeProps) {
+  const { language, t } = useLanguage();
   const [activePartnerIndex, setActivePartnerIndex] = useState(0);
   const [activeTestimonial, setActiveTestimonial] = useState(0);
   const [isMuted, setIsMuted] = useState(true);
@@ -21,13 +23,20 @@ export default function Home({ onNavigate }: HomeProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
 
   // 1. Dynamic rotating carousel for partners, events, etc.
-  const carouselItems = [
+  const carouselItems = language === "en" ? [
     { type: "Client Partner", name: "Apex Global Holdings", logoText: "AGH", detail: "Strategic consulting alignment on cross-border operations." },
     { type: "Key Event", name: "Dallas Business Summit 2026", logoText: "DBS", detail: "Keynote presentation on sustainable energy partnerships." },
     { type: "Global Conference", name: "DRC Economic Forum", logoText: "DEF", detail: "Ethical mining and minerals trade logistics workshop." },
     { type: "Community Project", name: "PESA Education Initiative", logoText: "PEI", detail: "Empowering 50+ local scholars with US study pathways." },
     { type: "Client Partner", name: "Vanguard Development Group", logoText: "VDG", detail: "Advisory on luxury mixed-use commercial land development." },
     { type: "International Alliance", name: "Sub-Saharan Trade Council", logoText: "SSTC", detail: "Structuring bilateral commodity exchange agreements." }
+  ] : [
+    { type: "Partenaire Client", name: "Apex Global Holdings", logoText: "AGH", detail: "Alignement du conseil stratégique sur les opérations transfrontalières." },
+    { type: "Événement Majeur", name: "Sommet des Affaires de Dallas 2026", logoText: "SAD", detail: "Présentation principale sur les partenariats énergétiques durables." },
+    { type: "Conférence Mondiale", name: "Forum Économique de la RDC", logoText: "DEF", detail: "Atelier sur l'exploitation minière éthique et la logistique du commerce des minerais." },
+    { type: "Projet Communautaire", name: "Initiative PESA Éducation", logoText: "PEI", detail: "Autonomisation de plus de 50 universitaires locaux avec des parcours d'études américains." },
+    { type: "Partenaire Client", name: "Vanguard Development Group", logoText: "VDG", detail: "Conseil en aménagement de terrains commerciaux de luxe à usage mixte." },
+    { type: "Alliance Internationale", name: "Conseil du Commerce Subsaharien", logoText: "SSTC", detail: "Structuration d'accords bilatéraux d'échange de matières premières." }
   ];
 
   useEffect(() => {
@@ -38,7 +47,7 @@ export default function Home({ onNavigate }: HomeProps) {
   }, [carouselItems.length]);
 
   // 2. Testimonials
-  const testimonials = [
+  const testimonials = language === "en" ? [
     {
       quote: "PESA Consulting Group has redefined our understanding of international advisory. Under Camy Likobe's leadership, we structured an extremely complex cross-border financial model with absolute compliance and zero friction.",
       author: "David Vance",
@@ -60,7 +69,88 @@ export default function Home({ onNavigate }: HomeProps) {
       rating: 5,
       image: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&q=80&w=150&h=150"
     }
+  ] : [
+    {
+      quote: "Le groupe de conseil PESA a redéfini notre vision de l'advisory international. Sous la direction de Camy Likobe, nous avons structuré un modèle financier transfrontalier extrêmement complexe avec une conformité absolue et zéro friction.",
+      author: "David Vance",
+      role: "Directeur Général, Apex Global Holdings",
+      rating: 5,
+      image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&q=80&w=150&h=150"
+    },
+    {
+      quote: "La transformation numérique conçue par PESA pour notre cadre logistique a complètement éliminé nos goulots d'étranglement opérationnels. Leur respect des délais, la qualité de leur travail et la rigueur de leurs indicateurs de performance sont exceptionnels.",
+      author: "Marie-Claire Boboy",
+      role: "Vice-présidente de la chaîne d'approvisionnement, DRC Trade Union",
+      rating: 5,
+      image: "https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&q=80&w=150&h=150"
+    },
+    {
+      quote: "Nous nous sommes associés à PESA pour notre projet d'aménagement immobilier au Texas. Leur équipe a parfaitement géré les audits environnementaux, les autorisations municipales et la structuration du capital privé. Une exécution d'entreprise sans faille.",
+      author: "Marcus Brody",
+      role: "Architecte Principal, Sundance Chateau Group",
+      rating: 5,
+      image: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&q=80&w=150&h=150"
+    }
   ];
+
+  const frenchServiceTranslations: Record<string, { title: string; overview: string }> = {
+    "strategy-consulting": {
+      title: "Conseil en Stratégie",
+      overview: "Chez PESA Consulting Group, notre pôle de Conseil en Stratégie collabore avec les dirigeants pour définir leur vision, naviguer sur des marchés en mutation et aligner les investissements sur des performances durables. Nous apportons une rigueur analytique, des modèles financiers sur mesure et des feuilles de route exploitables."
+    },
+    "technology-consulting": {
+      title: "Conseil Technologique",
+      overview: "Nous aidons les organisations à transformer la technologie d'un centre de coûts en un puissant moteur de croissance. Notre pôle de Conseil Technologique fournit des conseils objectifs et experts sur l'architecture informatique, la modernisation des systèmes et l'optimisation des outils numériques."
+    },
+    "digital-transformation": {
+      title: "Transformation Digitale",
+      overview: "La transformation digitale ne consiste pas seulement à adopter de nouvelles technologies, mais à repenser la façon dont votre organisation crée de la valeur. PESA travaille avec les entreprises pour automatiser les flux de travail clés et instaurer des cultures numériques centrées sur l'expérience client."
+    },
+    "human-resources": {
+      title: "Ressources Humaines",
+      overview: "Le principal avantage stratégique d'une organisation réside dans ses collaborateurs. Le pôle Ressources Humaines de PESA vous aide à acquérir, développer, retenir et inspirer des talents d'élite. Nous concevons des structures organisationnelles modernes et des systèmes de rémunération attractifs."
+    },
+    "project-management": {
+      title: "Gestion de Projet",
+      overview: "Les grandes idées exigent une exécution sans faille. Le pôle Gestion de Projet de PESA déploie des directeurs de projet certifiés et expérimentés pour piloter vos initiatives prioritaires. Nous apportons ordre, prévisibilité et dynamique aux programmes complexes."
+    },
+    "change-management": {
+      title: "Conduite du Changement",
+      overview: "Même la meilleure stratégie ou technologie échoue si vos équipes ne l'adoptent pas. Le pôle Conduite du Changement de PESA se concentre sur le facteur humain. Nous préparons et accompagnons vos employés à adopter de nouveaux processus et outils."
+    },
+    "business-process-improvement": {
+      title: "Amélioration des Processus",
+      overview: "Dans un paysage concurrentiel, l'efficacité opérationnelle est essentielle. Notre pôle d'Amélioration des Processus applique les principes du Lean et du Six Sigma pour analyser vos flux de travail existants, éliminer les goulets d'étranglement et automatiser les tâches."
+    },
+    "data-analytics": {
+      title: "Données & Analyses",
+      overview: "La donnée est votre actif le plus précieux. Notre pôle Données & Analyses vous aide à capturer, nettoyer, organiser et analyser l'information pour prendre des décisions plus rapides et fiables. Des tableaux de bord interactifs à la modélisation prédictive, nous convertissons la complexité en clarté."
+    },
+    "cybersecurity": {
+      title: "Cybersécurité",
+      overview: "Avec l'expansion numérique, les cybermenaces se multiplient. Le pôle Cybersécurité de PESA propose une gestion complète des risques, des audits de conformité, une surveillance des menaces et des systèmes de réponse rapide pour protéger vos actifs stratégiques."
+    },
+    "financial-advisory": {
+      title: "Conseil Financier",
+      overview: "Le pôle Conseil Financier de PESA accompagne les organisations lors de transactions critiques, d'expansions de capital et de cadres réglementaires complexes. Nous nous spécialisons dans la finance transfrontalière et la trésorerie."
+    },
+    "training": {
+      title: "Formation & Renforcement",
+      overview: "La croissance durable exige une culture d'apprentissage continu. Le pôle Formation de PESA conçoit et dispense des programmes de haut niveau, des formations techniques et des modules de conformité adaptés à vos défis."
+    },
+    "government-consulting": {
+      title: "Conseil au Secteur Public",
+      overview: "PESA accompagne les municipalités, États et gouvernements nationaux pour fournir des services publics efficaces, moderniser les systèmes d'information et planifier les infrastructures stratégiques, avec une intégrité absolue."
+    },
+    "private-sector": {
+      title: "Conseil au Secteur Privé",
+      overview: "Notre pôle dédié au Secteur Privé collabore avec les créateurs de startups, les entreprises familiales et les ETI pour structurer leurs opérations, étendre leur présence géographique et optimiser leurs chaînes logistiques."
+    },
+    "international-development": {
+      title: "Développement International",
+      overview: "Le pôle Développement International de PESA collabore avec les banques de développement, les ONG et les nations souveraines pour structurer des projets d'infrastructure, d'énergie propre et d'éducation sur les marchés émergents."
+    }
+  };
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -146,15 +236,24 @@ export default function Home({ onNavigate }: HomeProps) {
               className="font-sans text-4xl sm:text-5xl md:text-6xl text-white font-extrabold tracking-tight leading-[1.1] mb-6 uppercase"
               style={{ textShadow: "0 2px 10px rgba(0,0,0,0.8), 0 1px 3px rgba(0,0,0,0.8)" }}
             >
-              Transforming Organizations <br />
-              Through <span className="text-blue-400 font-black">Strategy, Technology & People</span>
+              {language === "en" ? (
+                <>
+                  Transforming Organizations <br />
+                  Through <span className="text-blue-400 font-black">Strategy, Technology & People</span>
+                </>
+              ) : (
+                <>
+                  Transformer les Organisations <br />
+                  Par la <span className="text-blue-400 font-black">Stratégie, Technologie & l'Humain</span>
+                </>
+              )}
             </h1>
 
             <p 
               className="text-slate-100 text-sm sm:text-base md:text-lg max-w-2xl mx-auto mb-10 leading-relaxed font-sans font-medium"
               style={{ textShadow: "0 2px 6px rgba(0,0,0,0.95)" }}
             >
-              We solve complex challenges and elevate global performance. Fully customized consulting divisions delivering operational rigor, technical modernization, global recruitment strategies, and executive transformation models.
+              {t("We solve complex challenges and elevate global performance. Fully customized consulting divisions delivering operational rigor, technical modernization, global recruitment strategies, and executive transformation models.")}
             </p>
 
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
@@ -163,7 +262,7 @@ export default function Home({ onNavigate }: HomeProps) {
                 className="w-full sm:w-auto px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white font-sans font-bold rounded-lg shadow-lg hover-blue-glow transition-all duration-300 flex items-center justify-center gap-3 cursor-pointer group"
                 id="hero-services-cta"
               >
-                <span>Our Services</span>
+                <span>{t("Our Services")}</span>
                 <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
               </button>
               
@@ -172,7 +271,7 @@ export default function Home({ onNavigate }: HomeProps) {
                 className="w-full sm:w-auto px-8 py-4 bg-slate-900/80 hover:bg-slate-800 text-white border border-slate-700/80 font-sans font-bold rounded-lg shadow-sm backdrop-blur-sm transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer"
                 id="hero-contact-cta"
               >
-                <span>Contact Us</span>
+                <span>{t("Contact Us")}</span>
               </button>
             </div>
           </div>
@@ -183,7 +282,7 @@ export default function Home({ onNavigate }: HomeProps) {
       <section className="py-8 bg-slate-900 border-y border-slate-800 overflow-hidden" id="partners">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <p className="text-[10px] text-center font-mono uppercase tracking-widest text-slate-400 mb-6 font-bold">
-            PESA Network Portfolio, Events & Alliances
+            {t("PESA Network Portfolio, Events & Alliances")}
           </p>
           
           <div className="relative max-w-5xl mx-auto" id="partners-carousel-wrapper">
@@ -245,8 +344,12 @@ export default function Home({ onNavigate }: HomeProps) {
                   className="w-full h-[400px] object-cover"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent p-6 flex flex-col justify-end text-white">
-                  <span className="text-[10px] font-mono text-blue-400 uppercase tracking-widest font-extrabold mb-1">Executive Headquarters</span>
-                  <p className="font-sans text-lg font-extrabold">PESA Dallas Advisory Office</p>
+                  <span className="text-[10px] font-mono text-blue-400 uppercase tracking-widest font-extrabold mb-1">
+                    {language === "en" ? "Executive Headquarters" : "Siège Exécutif"}
+                  </span>
+                  <p className="font-sans text-lg font-extrabold">
+                    {language === "en" ? "PESA Dallas Advisory Office" : "Bureau d'Advisory PESA Dallas"}
+                  </p>
                 </div>
               </div>
               <div className="absolute -bottom-6 -right-6 w-32 h-32 bg-blue-600 rounded-2xl -z-10 opacity-10"></div>
@@ -256,36 +359,45 @@ export default function Home({ onNavigate }: HomeProps) {
             <div className="lg:col-span-7 space-y-6" id="about-content-container">
               <div>
                 <p className="text-xs font-mono uppercase tracking-widest text-blue-600 mb-2 font-bold">
-                  About PESA Consulting Group
+                  {language === "en" ? "About PESA Consulting Group" : "À Propos de PESA Consulting Group"}
                 </p>
                 <h2 className="font-sans text-3xl sm:text-4xl text-slate-900 font-extrabold tracking-tight">
-                  Driving Corporate Value and Structural Innovation
+                  {language === "en" ? "Driving Corporate Value and Structural Innovation" : "Soutenir la Valeur d'Entreprise et l'Innovation Structurelle"}
                 </h2>
                 <div className="w-12 h-[1.5px] bg-blue-600 mt-4"></div>
               </div>
 
               <p className="text-slate-600 text-sm leading-relaxed font-sans">
-                PESA Consulting Group is a premier corporate advisory and strategy enablement firm built to provide highly tailored, rigorous solutions to visionary organizations worldwide. We guide clients through complex operational structures, technological change, and major financial milestones with absolute clarity and precision.
+                {language === "en" 
+                  ? "PESA Consulting Group is a premier corporate advisory and strategy enablement firm built to provide highly tailored, rigorous solutions to visionary organizations worldwide. We guide clients through complex operational structures, technological change, and major financial milestones with absolute clarity and precision."
+                  : "PESA Consulting Group est un cabinet d'advisory d'entreprise de premier plan conçu pour fournir des solutions rigoureuses et hautement personnalisées aux organisations visionnaires du monde entier. Nous guidons nos clients à travers des structures opérationnelles complexes, le changement technologique et des étapes financières majeures avec une clarté et une précision absolues."
+                }
               </p>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 pt-4">
                 <div className="space-y-2">
                   <h4 className="font-sans text-sm font-bold text-slate-900 flex items-center gap-2">
                     <Award className="w-4 h-4 text-blue-600" />
-                    <span>Our Mission</span>
+                    <span>{language === "en" ? "Our Mission" : "Notre Mission"}</span>
                   </h4>
                   <p className="text-xs text-slate-500 leading-relaxed font-sans">
-                    To deliver absolute operational excellence and customized strategy assets that empower corporations, investors, and public entities to achieve sustainable growth.
+                    {language === "en"
+                      ? "To deliver absolute operational excellence and customized strategy assets that empower corporations, investors, and public entities to achieve sustainable growth."
+                      : "Offrir une excellence opérationnelle absolue et des atouts stratégiques personnalisés qui permettent aux entreprises, aux investisseurs et aux entités publiques de réaliser une croissance durable."
+                    }
                   </p>
                 </div>
 
                 <div className="space-y-2">
                   <h4 className="font-sans text-sm font-bold text-slate-900 flex items-center gap-2">
                     <Star className="w-4 h-4 text-blue-600" />
-                    <span>Our Vision</span>
+                    <span>{language === "en" ? "Our Vision" : "Notre Vision"}</span>
                   </h4>
                   <p className="text-xs text-slate-500 leading-relaxed font-sans">
-                    To remain the world's most trusted partner for multi-jurisdictional consulting, pioneering structured change models that translate executive vision into operational success.
+                    {language === "en"
+                      ? "To remain the world's most trusted partner for multi-jurisdictional consulting, pioneering structured change models that translate executive vision into operational success."
+                      : "Demeurer le partenaire le plus fiable au monde pour le conseil multi-juridictionnel, en ouvrant la voie à des modèles de changement structurés qui traduisent la vision de la direction en succès opérationnel."
+                    }
                   </p>
                 </div>
               </div>
@@ -296,7 +408,7 @@ export default function Home({ onNavigate }: HomeProps) {
                   className="px-6 py-3 border border-slate-300 hover:border-blue-600 hover:text-blue-600 font-sans font-bold text-xs uppercase tracking-wider rounded-lg text-slate-700 transition-all duration-300 inline-flex items-center gap-2"
                   id="about-learn-more-btn"
                 >
-                  <span>Read Our Full Story</span>
+                  <span>{language === "en" ? "Read Our Full Story" : "Lire Notre Histoire Complète"}</span>
                   <ArrowRight className="w-3.5 h-3.5" />
                 </button>
               </div>
@@ -313,14 +425,17 @@ export default function Home({ onNavigate }: HomeProps) {
           {/* Section Header */}
           <div className="text-center max-w-3xl mx-auto mb-16">
             <p className="text-xs font-mono uppercase tracking-widest text-blue-600 mb-2 font-bold">
-              Consulting Expertise
+              {language === "en" ? "Consulting Expertise" : "Expertise en Conseil"}
             </p>
             <h2 className="font-sans text-3xl sm:text-4xl text-slate-900 font-extrabold tracking-tight">
-              Our Professional Services
+              {language === "en" ? "Our Professional Services" : "Nos Services Professionnels"}
             </h2>
             <div className="w-12 h-[1.5px] bg-blue-600 mx-auto mt-4 mb-4"></div>
             <p className="text-slate-600 text-sm max-w-xl mx-auto">
-              Explore our comprehensive divisions. Click on any card below to dive deep into custom solutions, case studies, and methodologies.
+              {language === "en"
+                ? "Explore our comprehensive divisions. Click on any card below to dive deep into custom solutions, case studies, and methodologies."
+                : "Explorez nos divisions complètes. Cliquez sur une carte ci-dessous pour plonger au cœur de nos solutions sur mesure, études de cas et méthodologies."
+              }
             </p>
           </div>
 
@@ -328,6 +443,10 @@ export default function Home({ onNavigate }: HomeProps) {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="services-grid-wrapper">
             {servicesDetailList.map((service) => {
               const ServiceIcon = IconMap[service.iconName] || Briefcase;
+              const isFr = language === "fr";
+              const title = isFr ? (frenchServiceTranslations[service.id]?.title || service.title) : service.title;
+              const overview = isFr ? (frenchServiceTranslations[service.id]?.overview || service.overview) : service.overview;
+
               return (
                 <div 
                   key={service.id}
@@ -342,16 +461,16 @@ export default function Home({ onNavigate }: HomeProps) {
                     
                     <div>
                       <h4 className="font-sans text-base font-bold text-slate-950 group-hover:text-blue-600 transition-colors">
-                        {service.title}
+                        {title}
                       </h4>
                       <p className="text-xs text-slate-500 mt-2 line-clamp-3 leading-relaxed font-sans">
-                        {service.overview}
+                        {overview}
                       </p>
                     </div>
                   </div>
 
                   <div className="pt-6 border-t border-slate-100 mt-6 flex items-center justify-between text-xs font-mono uppercase tracking-widest text-blue-600 font-bold">
-                    <span>Explore Division</span>
+                    <span>{language === "en" ? "Explore Division" : "Découvrir la Division"}</span>
                     <ArrowUpRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                   </div>
                 </div>
@@ -370,45 +489,77 @@ export default function Home({ onNavigate }: HomeProps) {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
             
             <div className="lg:col-span-4 space-y-4">
-              <span className="text-[10px] font-mono text-blue-400 uppercase tracking-widest font-extrabold block">Performance Record</span>
+              <span className="text-[10px] font-mono text-blue-400 uppercase tracking-widest font-extrabold block">
+                {language === "en" ? "Performance Record" : "Historique de Performance"}
+              </span>
               <h3 className="font-sans text-3xl sm:text-4xl text-white font-extrabold tracking-tight">
-                Why Visionary Leaders Trust PESA Group
+                {language === "en" ? "Why Visionary Leaders Trust PESA Group" : "Pourquoi les Dirigeants Visionnaires Font Confiance au Groupe PESA"}
               </h3>
               <p className="text-slate-300 text-xs sm:text-sm leading-relaxed font-sans">
-                Our approach blends world-class consulting standards with absolute tactical execution. We measure our achievements based on real financial outcomes and successful regulatory compliance.
+                {language === "en"
+                  ? "Our approach blends world-class consulting standards with absolute tactical execution. We measure our achievements based on real financial outcomes and successful regulatory compliance."
+                  : "Notre approche associe des standards de conseil de classe mondiale à une exécution tactique absolue. Nous mesurons nos réalisations sur la base de résultats financiers réels et d'une conformité réglementaire rigoureuse."
+                }
               </p>
             </div>
 
             <div className="lg:col-span-8 grid grid-cols-2 md:grid-cols-3 gap-6 sm:gap-8">
               
               <div className="p-5 bg-slate-900/60 rounded-xl border border-slate-800/80 backdrop-blur-sm space-y-1">
-                <span className="font-mono text-3xl sm:text-4xl font-extrabold text-blue-400 block tracking-tight">10+ Years</span>
-                <span className="text-xs font-mono uppercase tracking-wider text-slate-300 block">Experience</span>
-                <span className="text-[10px] text-slate-400 block leading-snug">Elite advisory history and asset procurement networks.</span>
+                <span className="font-mono text-3xl sm:text-4xl font-extrabold text-blue-400 block tracking-tight">10+ {language === "en" ? "Years" : "Ans"}</span>
+                <span className="text-xs font-mono uppercase tracking-wider text-slate-300 block">{language === "en" ? "Experience" : "Expérience"}</span>
+                <span className="text-[10px] text-slate-400 block leading-snug">
+                  {language === "en"
+                    ? "Elite advisory history and asset procurement networks."
+                    : "Historique d'advisory d'élite et réseaux d'approvisionnement d'actifs."
+                  }
+                </span>
               </div>
 
               <div className="p-5 bg-slate-900/60 rounded-xl border border-slate-800/80 backdrop-blur-sm space-y-1">
                 <span className="font-mono text-3xl sm:text-4xl font-extrabold text-blue-400 block tracking-tight">300+</span>
-                <span className="text-xs font-mono uppercase tracking-wider text-slate-300 block">Projects Delivered</span>
-                <span className="text-[10px] text-slate-400 block leading-snug">Successful cross-border and corporate advisory setups.</span>
+                <span className="text-xs font-mono uppercase tracking-wider text-slate-300 block">{language === "en" ? "Projects Delivered" : "Projets Livrés"}</span>
+                <span className="text-[10px] text-slate-400 block leading-snug">
+                  {language === "en"
+                    ? "Successful cross-border and corporate advisory setups."
+                    : "Configurations d'advisory d'entreprise et transfrontalières réussies."
+                  }
+                </span>
               </div>
 
               <div className="p-5 bg-slate-900/60 rounded-xl border border-slate-800/80 backdrop-blur-sm space-y-1">
                 <span className="font-mono text-3xl sm:text-4xl font-extrabold text-blue-400 block tracking-tight">30+</span>
-                <span className="text-xs font-mono uppercase tracking-wider text-slate-300 block">Countries Served</span>
-                <span className="text-[10px] text-slate-400 block leading-snug">Managing international investment visas and logistics.</span>
+                <span className="text-xs font-mono uppercase tracking-wider text-slate-300 block">{language === "en" ? "Countries Served" : "Pays Desservis"}</span>
+                <span className="text-[10px] text-slate-400 block leading-snug">
+                  {language === "en"
+                    ? "Managing international investment visas and logistics."
+                    : "Gestion de visas d'investissement internationaux et de la logistique."
+                  }
+                </span>
               </div>
 
               <div className="p-5 bg-slate-900/60 rounded-xl border border-slate-800/80 backdrop-blur-sm space-y-1 col-span-2 md:col-span-1">
                 <span className="font-mono text-3xl sm:text-4xl font-extrabold text-blue-400 block tracking-tight">100%</span>
-                <span className="text-xs font-mono uppercase tracking-wider text-slate-300 block">Approval Record</span>
-                <span className="text-[10px] text-slate-400 block leading-snug">Adjudicated approval rate for global study & EB-5 visas.</span>
+                <span className="text-xs font-mono uppercase tracking-wider text-slate-300 block">{language === "en" ? "Approval Record" : "Taux d'Approbation"}</span>
+                <span className="text-[10px] text-slate-400 block leading-snug">
+                  {language === "en"
+                    ? "Adjudicated approval rate for global study & EB-5 visas."
+                    : "Taux d'approbation certifié pour les visas d'études et EB-5."
+                  }
+                </span>
               </div>
 
               <div className="p-5 bg-slate-900/60 rounded-xl border border-slate-800/80 backdrop-blur-sm space-y-1 col-span-2 md:col-span-2">
-                <span className="font-mono text-2xl sm:text-3xl font-extrabold text-emerald-400 block tracking-tight">STRICT B wire only</span>
-                <span className="text-xs font-mono uppercase tracking-wider text-slate-300 block">Strict Compliance</span>
-                <span className="text-[10px] text-slate-400 block leading-snug">Zero cash handling. Transparent corporate governance and bank-to-bank compliance audits.</span>
+                <span className="font-mono text-2xl sm:text-3xl font-extrabold text-emerald-400 block tracking-tight">
+                  {language === "en" ? "STRICT B wire only" : "VIREMENT UNIQUEMENT"}
+                </span>
+                <span className="text-xs font-mono uppercase tracking-wider text-slate-300 block">{language === "en" ? "Strict Compliance" : "Strict Conformité"}</span>
+                <span className="text-[10px] text-slate-400 block leading-snug">
+                  {language === "en"
+                    ? "Zero cash handling. Transparent corporate governance and bank-to-bank compliance audits."
+                    : "Aucune manipulation d'espèces. Gouvernance d'entreprise transparente et audits de conformité bancaires."
+                  }
+                </span>
               </div>
 
             </div>
@@ -491,10 +642,10 @@ export default function Home({ onNavigate }: HomeProps) {
           <div className="flex flex-col md:flex-row items-start md:items-end justify-between mb-16">
             <div>
               <p className="text-xs font-mono uppercase tracking-widest text-blue-600 mb-2 font-bold">
-                Thought Leadership
+                {language === "en" ? "Thought Leadership" : "Pensée Stratégique"}
               </p>
               <h2 className="font-sans text-3xl sm:text-4xl text-slate-900 font-extrabold tracking-tight">
-                Latest Insights & Research
+                {language === "en" ? "Latest Insights & Research" : "Dernières Analyses & Recherches"}
               </h2>
               <div className="w-12 h-[1.5px] bg-blue-600 mt-4"></div>
             </div>
@@ -504,7 +655,7 @@ export default function Home({ onNavigate }: HomeProps) {
               className="mt-4 md:mt-0 px-5 py-2.5 bg-white border border-slate-300 hover:border-blue-600 hover:text-blue-600 font-sans font-bold text-xs uppercase tracking-wider rounded-lg text-slate-700 transition-all cursor-pointer flex items-center gap-2"
               id="view-all-insights-btn"
             >
-              <span>View Knowledge Center</span>
+              <span>{language === "en" ? "View Knowledge Center" : "Voir le Centre de Connaissances"}</span>
               <ArrowUpRight className="w-3.5 h-3.5" />
             </button>
           </div>
@@ -521,16 +672,24 @@ export default function Home({ onNavigate }: HomeProps) {
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                   />
                   <div className="absolute top-4 left-4 bg-[#0A2540] text-blue-300 text-[9px] font-mono uppercase tracking-widest px-2.5 py-1 rounded font-bold border border-slate-800">
-                    White Paper
+                    {language === "en" ? "White Paper" : "Livre Blanc"}
                   </div>
                 </div>
                 <div className="p-6 space-y-2">
-                  <span className="text-[10px] font-mono text-slate-400 block font-semibold uppercase">July 10, 2026 // Strategy</span>
+                  <span className="text-[10px] font-mono text-slate-400 block font-semibold uppercase">
+                    {language === "en" ? "July 10, 2026 // Strategy" : "10 Juillet 2026 // Stratégie"}
+                  </span>
                   <h4 className="font-sans text-sm font-bold text-slate-950 group-hover:text-blue-600 transition-colors leading-tight">
-                    Multi-Jurisdictional Capital Allocations & Offshore Regulatory Structures
+                    {language === "en" 
+                      ? "Multi-Jurisdictional Capital Allocations & Offshore Regulatory Structures" 
+                      : "Allocations de capital multi-juridictionnelles & structures réglementaires offshore"
+                    }
                   </h4>
                   <p className="text-xs text-slate-500 line-clamp-3 leading-relaxed font-sans">
-                    A deep dive into cross-border tax compliance, project pre-financing frameworks, and securing direct investor alignment on infrastructure deals.
+                    {language === "en"
+                      ? "A deep dive into cross-border tax compliance, project pre-financing frameworks, and securing direct investor alignment on infrastructure deals."
+                      : "Une analyse approfondie de la conformité fiscale transfrontalière, des cadres de préfinancement de projet et de la sécurisation des investisseurs sur les accords d'infrastructure."
+                    }
                   </p>
                 </div>
               </div>
@@ -539,7 +698,7 @@ export default function Home({ onNavigate }: HomeProps) {
                   onClick={() => onNavigate("/resources")}
                   className="text-xs font-sans font-bold text-blue-600 hover:text-blue-700 flex items-center gap-1"
                 >
-                  <span>Read Article</span>
+                  <span>{language === "en" ? "Read Article" : "Lire l'Article"}</span>
                   <ArrowRight className="w-3.5 h-3.5" />
                 </button>
               </div>
@@ -555,16 +714,24 @@ export default function Home({ onNavigate }: HomeProps) {
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                   />
                   <div className="absolute top-4 left-4 bg-[#0A2540] text-blue-300 text-[9px] font-mono uppercase tracking-widest px-2.5 py-1 rounded font-bold border border-slate-800">
-                    Research Report
+                    {language === "en" ? "Research Report" : "Rapport de Recherche"}
                   </div>
                 </div>
                 <div className="p-6 space-y-2">
-                  <span className="text-[10px] font-mono text-slate-400 block font-semibold uppercase">June 28, 2026 // Cybersecurity</span>
+                  <span className="text-[10px] font-mono text-slate-400 block font-semibold uppercase">
+                    {language === "en" ? "June 28, 2026 // Cybersecurity" : "28 Juin 2026 // Cybersécurité"}
+                  </span>
                   <h4 className="font-sans text-sm font-bold text-slate-950 group-hover:text-blue-600 transition-colors leading-tight">
-                    Securing Multi-Channel Advisory Portals in the Era of AI & Zero Trust
+                    {language === "en"
+                      ? "Securing Multi-Channel Advisory Portals in the Era of AI & Zero Trust"
+                      : "Sécurisation des portails de conseil multi-canaux à l'ère de l'IA & du Zero Trust"
+                    }
                   </h4>
                   <p className="text-xs text-slate-500 line-clamp-3 leading-relaxed font-sans">
-                    How enterprise consulting groups are auditing wire transfers, eliminating physical cash transactions, and enforcing cryptographically validated documentation pipelines.
+                    {language === "en"
+                      ? "How enterprise consulting groups are auditing wire transfers, eliminating physical cash transactions, and enforcing cryptographically validated documentation pipelines."
+                      : "Comment les groupes de conseil auditent les virements, éliminent les transactions en espèces et imposent des flux documentaires cryptographiquement validés."
+                    }
                   </p>
                 </div>
               </div>
@@ -573,7 +740,7 @@ export default function Home({ onNavigate }: HomeProps) {
                   onClick={() => onNavigate("/resources")}
                   className="text-xs font-sans font-bold text-blue-600 hover:text-blue-700 flex items-center gap-1"
                 >
-                  <span>Read Report</span>
+                  <span>{language === "en" ? "Read Report" : "Lire le Rapport"}</span>
                   <ArrowRight className="w-3.5 h-3.5" />
                 </button>
               </div>
@@ -589,16 +756,24 @@ export default function Home({ onNavigate }: HomeProps) {
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                   />
                   <div className="absolute top-4 left-4 bg-[#0A2540] text-blue-300 text-[9px] font-mono uppercase tracking-widest px-2.5 py-1 rounded font-bold border border-slate-800">
-                    Case Study
+                    {language === "en" ? "Case Study" : "Étude de Cas"}
                   </div>
                 </div>
                 <div className="p-6 space-y-2">
-                  <span className="text-[10px] font-mono text-slate-400 block font-semibold uppercase">May 15, 2026 // Case Study</span>
+                  <span className="text-[10px] font-mono text-slate-400 block font-semibold uppercase">
+                    {language === "en" ? "May 15, 2026 // Case Study" : "15 Mai 2026 // Étude de Cas"}
+                  </span>
                   <h4 className="font-sans text-sm font-bold text-slate-950 group-hover:text-blue-600 transition-colors leading-tight">
-                    The PESA Method: Executing Complete Business Transformation for 1,200 Scholars
+                    {language === "en"
+                      ? "The PESA Method: Executing Complete Business Transformation for 1,200 Scholars"
+                      : "La méthode PESA : réussir la transformation complète pour 1 200 boursiers"
+                    }
                   </h4>
                   <p className="text-xs text-slate-500 line-clamp-3 leading-relaxed font-sans">
-                    An in-depth look at how PESA Education restructured study visa compliance, ensuring 100% approval ratings across selected partner academic institutions.
+                    {language === "en"
+                      ? "An in-depth look at how PESA Education restructured study visa compliance, ensuring 100% approval ratings across selected partner academic institutions."
+                      : "Un aperçu détaillé de la façon dont PESA Education a restructuré la conformité des visas d'études, garantissant des taux d'approbation de 100%."
+                    }
                   </p>
                 </div>
               </div>
@@ -607,7 +782,7 @@ export default function Home({ onNavigate }: HomeProps) {
                   onClick={() => onNavigate("/resources")}
                   className="text-xs font-sans font-bold text-blue-600 hover:text-blue-700 flex items-center gap-1"
                 >
-                  <span>Read Study</span>
+                  <span>{language === "en" ? "Read Study" : "Lire l'Étude"}</span>
                   <ArrowRight className="w-3.5 h-3.5" />
                 </button>
               </div>
@@ -625,21 +800,31 @@ export default function Home({ onNavigate }: HomeProps) {
           
           <div className="inline-flex items-center gap-2 p-1.5 bg-slate-900 border border-slate-800 rounded-full">
             <Mail className="w-3.5 h-3.5 text-blue-400 ml-1" />
-            <span className="text-[9px] font-mono uppercase tracking-widest text-slate-300 font-extrabold pr-2">Secure Publication</span>
+            <span className="text-[9px] font-mono uppercase tracking-widest text-slate-300 font-extrabold pr-2">
+              {language === "en" ? "Secure Publication" : "Publication Sécurisée"}
+            </span>
           </div>
 
           <h3 className="font-sans text-2xl sm:text-3xl text-white font-extrabold tracking-tight">
-            Stay informed through our newsletter
+            {language === "en" ? "Stay informed through our newsletter" : "Restez informé grâce à notre newsletter"}
           </h3>
           <p className="text-slate-300 text-xs sm:text-sm max-w-xl mx-auto leading-relaxed">
-            Receive the latest job opportunities, company news and industry insights delivered straight from our Executive Desk.
+            {language === "en"
+              ? "Receive the latest job opportunities, company news and industry insights delivered straight from our Executive Desk."
+              : "Recevez les dernières opportunités de carrière, les actualités de l'entreprise et les analyses sectorielles directement de notre bureau exécutif."
+            }
           </p>
 
           <form onSubmit={handleSubscribe} className="max-w-md mx-auto pt-4" id="newsletter-form">
             {newsletterSubscribed ? (
               <div className="bg-emerald-950/40 border border-emerald-500/20 rounded-xl p-4 flex items-center justify-center gap-3 animate-fade-in text-emerald-300">
                 <Check className="w-5 h-5" />
-                <span className="text-xs font-semibold">Thank you for subscribing! We have registered your secure portal link.</span>
+                <span className="text-xs font-semibold">
+                  {language === "en"
+                    ? "Thank you for subscribing! We have registered your secure portal link."
+                    : "Merci pour votre abonnement ! Nous avons enregistré votre lien de portail sécurisé."
+                  }
+                </span>
               </div>
             ) : (
               <div className="flex flex-col sm:flex-row items-center gap-2">
@@ -648,7 +833,7 @@ export default function Home({ onNavigate }: HomeProps) {
                   required
                   value={emailValue}
                   onChange={(e) => setEmailValue(e.target.value)}
-                  placeholder="Enter your professional email address"
+                  placeholder={language === "en" ? "Enter your professional email address" : "Saisissez votre adresse e-mail professionnelle"}
                   className="w-full bg-slate-900 hover:bg-slate-900/80 focus:bg-slate-950 border border-slate-800 focus:border-blue-500 rounded-lg px-4 py-3 text-xs text-white focus:outline-none focus:ring-1 focus:ring-blue-500 placeholder-slate-500 transition-all font-sans"
                   id="newsletter-email-input"
                 />
@@ -657,14 +842,17 @@ export default function Home({ onNavigate }: HomeProps) {
                   className="w-full sm:w-auto px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-sans font-bold text-xs uppercase tracking-widest rounded-lg shadow-lg hover-blue-glow transition-all duration-300 shrink-0 cursor-pointer"
                   id="newsletter-subscribe-btn"
                 >
-                  Subscribe
+                  {language === "en" ? "Subscribe" : "S'abonner"}
                 </button>
               </div>
             )}
           </form>
 
           <p className="text-[10px] text-slate-500 font-mono leading-normal max-w-lg mx-auto">
-            * By subscribing, you agree to receive strategic briefs from PESA Consulting. Your email is encrypted and never shared with third parties. You may unsubscribe securely at any time.
+            {language === "en"
+              ? "* By subscribing, you agree to receive strategic briefs from PESA Consulting. Your email is encrypted and never shared with third parties. You may unsubscribe securely at any time."
+              : "* En vous abonnant, vous acceptez de recevoir des notes stratégiques de PESA Consulting. Votre e-mail est chiffré et ne sera jamais partagé. Vous pouvez vous désabonner en toute sécurité à tout moment."
+            }
           </p>
 
         </div>
