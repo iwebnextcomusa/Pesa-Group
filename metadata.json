@@ -1,6 +1,6 @@
 {
-  "name": "Pesa Group",
-  "description": "Redesigned digital headquarters of PESA Consulting Group LLC, showcasing international advisory, luxury real estate, visa consulting, mining operations, land development, and private jet sales, with an AI assistant.",
+  "name": "PESA Consulting Group",
+  "description": "The elite digital headquarters of PESA Consulting Group, providing world-class strategy, technology, digital transformation, HR, and project management consulting services worldwide with an integrated AI Chatbot and PESA System interactive simulation.",
   "requestFramePermissions": [],
   "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
 }
