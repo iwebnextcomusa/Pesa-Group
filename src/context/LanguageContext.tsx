@@ -16,6 +16,7 @@ const translations: Record<string, string> = {
   "About": "À Propos",
   "PESA System": "Système PESA",
   "Executive Team": "Équipe Dirigeante",
+  "Somptueux Realty": "Immobilier Somptueux",
   "Offices": "Bureaux",
   "Careers": "Carrières",
   "Resources": "Ressources",

@@ -18,6 +18,7 @@ export default function Header({ currentPath, onNavigate }: HeaderProps) {
     { path: "/about", label: "About" },
     { path: "/system", label: "PESA System" },
     { path: "/team", label: "Executive Team" },
+    { path: "/realty", label: "Somptueux Realty" },
     { path: "/offices", label: "Offices" },
     { path: "/careers", label: "Careers" },
     { path: "/resources", label: "Resources" },

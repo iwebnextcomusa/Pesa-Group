@@ -38,6 +38,7 @@ export const servicesDetailList: ServiceDetail[] = [
       "Bespoke Corporate Financial Modeling & Capital Structuring",
       "Global Market Entry Strategies & Joint Venture Advisory",
       "EB-5 Program Capital Advisory & Immigrant Investment Structuring",
+      "Waste-to-Energy & Industrial Upcycling: Strategic advisory on the commercial transformation of waste into electricity, high-performance fabric pavement, building bricks, oil & gas resources, and eco-friendly roofing systems",
       "Mergers & Acquisitions (M&A) Integration & Due Diligence",
       "Corporate Governance Frameworks & Succession Planning"
     ],
@@ -492,6 +493,7 @@ export const servicesDetailList: ServiceDetail[] = [
     solutions: [
       "Emerging Market Investment Feasibility & Risk Assessments",
       "Sustainable Infrastructure & Renewable Energy Project Structuring",
+      "Waste-to-Resource Infrastructure: Structuring multi-million dollar projects converting raw municipal waste into electricity, high-durability fabric pavements, masonry bricks, secondary oil & gas resources, and premium weather-proof roofing materials",
       "Community Economic Empowerment & Micro-Finance Programs",
       "Monitoring, Evaluation & Learning (MEL) Framework Design",
       "ESG Compliance & Multi-Stakeholder Alignment Management"

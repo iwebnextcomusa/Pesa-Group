@@ -15,6 +15,7 @@ import CareersPage from "./pages/CareersPage";
 import ResourcesPage from "./pages/ResourcesPage";
 import ContactPage from "./pages/ContactPage";
 import ServiceDetailComponent from "./pages/ServiceDetail";
+import SomptueuxRealty from "./pages/SomptueuxRealty";
 
 export default function App() {
   const [currentPath, setCurrentPath] = useState("/");
@@ -46,6 +47,9 @@ export default function App() {
     }
     if (currentPath === "/system") {
       return <PesaSystemPage />;
+    }
+    if (currentPath === "/realty") {
+      return <SomptueuxRealty />;
     }
     if (currentPath === "/offices") {
       return <OfficesPage />;

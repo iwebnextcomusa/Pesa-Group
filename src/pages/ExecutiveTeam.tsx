@@ -1,72 +1,72 @@
-import React, { useState, useEffect } from "react";
-import { Mail, ArrowUpRight, ShieldCheck, Award, Briefcase, Star, MessageSquare } from "lucide-react";
+import React, { useState } from "react";
+import { Mail, ArrowUpRight, ShieldCheck, Award, Briefcase, Phone, MapPin } from "lucide-react";
 import { useLanguage } from "../context/LanguageContext";
+import { teamData, teamDataFR } from "../data";
 
 export default function ExecutiveTeam() {
   const { language, t } = useLanguage();
   const [selectedLeaderIndex, setSelectedLeaderIndex] = useState(0);
 
-  const translatedTeamData = language === "en" ? [
-    {
-      name: "Camy Likobe",
-      role: "President & Chief Executive Officer (CEO)",
-      experience: "Over a decade in global enterprise leadership, financial asset management, and luxury real estate brokerage.",
-      bio: "Mr. Likobe is an accomplished corporate leader who has built a successful career across premier global organizations. Having served in high-impact positions at Branch Banking & Trust (BB&T), TD Ameritrade, and Competitive Edge Realty, he founded PESA Consulting Group to build a global legacy of purpose-driven solutions for discerning individual and institutional clients.",
-      image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=400&h=400"
-    },
-    {
-      name: "Charles Adekola",
-      role: "Vice President",
-      experience: "10+ years specializing in consulting, credit structuring, loan syndication, and high-growth business advisory.",
-      bio: "Mr. Adekola launched his professional journey in the financial consulting loan industry, making notable impacts as a premier director at Lender Express. Over more than 10 years, he has led key client transactions, strategic investments, and structural development programs, collaborating closely with local managers in Dallas and Central Africa.",
-      image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&q=80&w=400&h=400"
-    },
-    {
-      name: "Carole Boboy",
-      role: "Chief Operations Officer (COO)",
-      experience: "8+ years in global business logistics, international trade networks, and client success workflows.",
-      bio: "Ms. Boboy manages the day-to-day operational execution of PESA's diversified industries. Bridging executive efforts across the Dallas and Kinshasa administrative branches, she ensures the delivery of top-quality service across our visa services, mining, and luxury jet sales networks.",
-      image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=400&h=400"
-    },
-    {
-      name: "Laetitia Kalala",
-      role: "Chief Financial Officer (CFO)",
-      experience: "9+ years in international tax compliance, corporate treasury, and private equity capital management.",
-      bio: "Ms. Kalala leads PESA's financial structures, managing client capital projections, EB-5 investment structures, and resource allocation. Her extensive treasury experience ensures absolute transparency, strict compliance, and optimal investor yield across international jurisdictions.",
-      image: "https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&q=80&w=400&h=400"
-    }
-  ] : [
-    {
-      name: "Camy Likobe",
-      role: "Président & Directeur Général (CEO)",
-      experience: "Plus d'une décennie dans la direction d'entreprises mondiales, la gestion d'actifs financiers et le courtage immobilier de luxe.",
-      bio: "M. Likobe est un dirigeant d'entreprise accompli qui a mené une brillante carrière au sein d'organisations mondiales de premier plan. Après avoir occupé des postes stratégiques à la Branch Banking & Trust (BB&T), TD Ameritrade et Competitive Edge Realty, il a fondé PESA Consulting Group pour bâtir un héritage mondial de solutions axées sur le succès de nos clients individuels et institutionnels.",
-      image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=400&h=400"
-    },
-    {
-      name: "Charles Adekola",
-      role: "Vice-Président",
-      experience: "Plus de 10 ans de spécialisation en conseil, structuration de crédit, syndication de prêts et conseil aux entreprises à forte croissance.",
-      bio: "M. Adekola a commencé son parcours professionnel dans le secteur du conseil financier et du crédit, se distinguant comme directeur principal chez Lender Express. Depuis plus de 10 ans, il dirige des transactions clients d'envergure, des investissements stratégiques et des programmes de développement structurel, en étroite collaboration avec les responsables locaux à Dallas et en Afrique centrale.",
-      image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&q=80&w=400&h=400"
-    },
-    {
-      name: "Carole Boboy",
-      role: "Directrice des Opérations (COO)",
-      experience: "Plus de 8 ans dans la logistique commerciale mondiale, les réseaux commerciaux internationaux et les flux de réussite client.",
-      bio: "Mme Boboy gère l'exécution opérationnelle quotidienne des diverses activités de PESA. Faisant le lien entre les directions administratives de Dallas et de Kinshasa, elle veille à la livraison de services de qualité supérieure à travers nos réseaux de visas d'études, d'exploitation minière et de vente de jets privés.",
-      image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=400&h=400"
-    },
-    {
-      name: "Laetitia Kalala",
-      role: "Directrice Financière (CFO)",
-      experience: "Plus de 9 ans dans la conformité fiscale internationale, la trésorerie d'entreprise et la gestion des capitaux propres.",
-      bio: "Mme Kalala dirige les structures financières de PESA, supervisant les projections de capital des clients, les structures d'investissement EB-5 et l'allocation des ressources. Sa solide expérience en trésorerie garantit une transparence absolue, une conformité rigoureise et des rendements optimaux pour les investisseurs dans les juridictions internationales.",
-      image: "https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&q=80&w=400&h=400"
-    }
-  ];
+  const translatedTeamData = language === "en" ? teamData : teamDataFR;
 
-  const selectedLeader = translatedTeamData[selectedLeaderIndex];
+  const selectedLeader = translatedTeamData[selectedLeaderIndex] || translatedTeamData[0];
+
+  // Specific contact info or details for team members like Arsene Mulolo Mulapia
+  const isArsene = selectedLeader.name === "Arsene Mulolo Mulapia";
+
+  const getPortfolios = (name: string) => {
+    if (name === "Camy Likobe") {
+      return language === "en" 
+        ? "Capital Projections, EB-5 Portfolios, Luxury Asset Brokerage, Dallas Infrastructure Core." 
+        : "Projections de capital, portefeuilles EB-5, courtage d'actifs de luxe, infrastructure principale de Dallas.";
+    }
+    if (name === "Charles Adekola") {
+      return language === "en" 
+        ? "Corporate Debt Structures, Local US-DRC Lending Syndication, Bilateral Joint Ventures." 
+        : "Structures de dette d'entreprise, syndication locale de prêts US-RDC, coentreprises bilatérales.";
+    }
+    if (name === "Carole Boboy") {
+      return language === "en" 
+        ? "DRC Administrative Audits, Mineral Sourcing Compliance, Study Abroad Logistics Sourcing." 
+        : "Audits administratifs en RDC, conformité de l'approvisionnement en minerais, logistique d'études à l'étranger.";
+    }
+    if (name === "Laetitia Kalala") {
+      return language === "en" 
+        ? "Tax Compliance, Treasury Allocations, Profit Margin Formula Adjustments." 
+        : "Conformité fiscale, allocations de trésorerie, ajustements de formule de marge bénéficiaire.";
+    }
+    if (name === "Yannick Matadi") {
+      return language === "en"
+        ? "Compliance Risk Auditing, Zero Cash Audit Operations, Financial Compliance, Anti-Money Laundering Frameworks."
+        : "Audit des risques de conformité, opérations d'audit zéro cash, conformité financière, cadres de lutte contre le blanchiment d'argent.";
+    }
+    if (name === "Sourya Nyabolondo") {
+      return language === "en"
+        ? "Dallas-Kinshasa Liaison Core, Board of Directors Alignments, Executive Coordination Systems."
+        : "Liaison principale Dallas-Kinshasa, alignements du conseil d'administration, systèmes de coordination de direction.";
+    }
+    if (name === "Arsene Mulolo Mulapia") {
+      return language === "en"
+        ? "Global Account Consulting, Multinational Partnerships, Strategic Account Planning, High-Value Contract Negotiations."
+        : "Conseil de comptes globaux, partenariats multinationaux, planification stratégique des comptes, négociations de contrats de grande valeur.";
+    }
+    if (name === "Heritier Bongombe") {
+      return language === "en"
+        ? "Global Infrastructure Operations, Local Subcontractor Networks, Supply Chain Logistics."
+        : "Opérations d'infrastructure globales, réseaux de sous-traitants locaux, logistique de chaîne d'approvisionnement.";
+    }
+    if (name === "Deborah Akinkuolie") {
+      return language === "en"
+        ? "Global Academic Sourcing, Study Abroad Program Assembly, Timeline Coordination, Stakeholder Communication Systems."
+        : "Approvisionnement académique mondial, assemblage de programmes d'études à l'étranger, coordination des calendriers, systèmes de communication avec les parties prenantes.";
+    }
+    if (name === "Deborah Kayiba") {
+      return language === "en"
+        ? "Executive Administration Support, Document Portal Control, Customer Scheduling Channels, Records Security."
+        : "Soutien à l'administration de la direction, contrôle des portails documentaires, canaux de planification client, sécurité des dossiers.";
+    }
+    return language === "en" ? "General PESA Consulting Operations Portfolio." : "Portefeuille d'opérations générales de PESA Consulting.";
+  };
 
   return (
     <div className="flex-1 animate-fade-in py-20 bg-slate-50" id="executive-team-page-root">
@@ -101,7 +101,7 @@ export default function ExecutiveTeam() {
                 {language === "en" ? "Executive Directories" : "Répertoires Exécutifs"}
               </h4>
 
-              <div className="flex flex-col gap-3">
+              <div className="flex flex-col gap-3 max-h-[750px] overflow-y-auto pr-2 custom-scrollbar">
                 {translatedTeamData.map((member, idx) => {
                   const isSelected = selectedLeaderIndex === idx;
 
@@ -130,7 +130,7 @@ export default function ExecutiveTeam() {
                           {member.name}
                         </h4>
                         <p className="text-[10px] text-slate-400 truncate font-sans">
-                          {member.experience.split(" spécial")[0]}
+                          {member.experience}
                         </p>
                       </div>
 
@@ -164,7 +164,7 @@ export default function ExecutiveTeam() {
                   <img 
                     src={selectedLeader.image} 
                     alt={selectedLeader.name} 
-                    className="w-24 h-24 sm:w-28 sm:h-28 rounded-xl object-cover border border-slate-200 shadow-md"
+                    className="w-24 h-24 sm:w-28 sm:h-28 rounded-xl object-cover border border-slate-200 shadow-md animate-fade-in"
                   />
                   <div className="text-center sm:text-left space-y-2">
                     <span className="inline-flex items-center gap-1 px-3 py-1 bg-blue-50 border border-blue-100 rounded-full text-[10px] text-blue-600 font-mono font-bold">
@@ -187,7 +187,7 @@ export default function ExecutiveTeam() {
                   <h4 className="text-xs uppercase font-mono tracking-widest text-slate-400 font-bold">
                     {language === "en" ? "Executive Biography" : "Biographie de l'Exécutif"}
                   </h4>
-                  <p className="whitespace-pre-wrap">{selectedLeader.bio}</p>
+                  <p className="whitespace-pre-wrap leading-relaxed">{selectedLeader.bio}</p>
                 </div>
 
                 {/* Detailed experience breakdown */}
@@ -210,10 +210,7 @@ export default function ExecutiveTeam() {
                       <div>
                         <strong className="text-slate-950 font-sans text-xs block">{language === "en" ? "Global Portfolios Managed:" : "Portefeuilles Mondiaux Gérés :"}</strong>
                         <p className="text-slate-500 font-sans text-[11px] leading-relaxed mt-0.5">
-                          {selectedLeader.name === "Camy Likobe" && (language === "en" ? "Capital Projections, EB-5 Portfolios, Luxury Asset Brokerage, Dallas Infrastructure Core." : "Projections de capital, portefeuilles EB-5, courtage d'actifs de luxe, infrastructure principale de Dallas.")}
-                          {selectedLeader.name === "Charles Adekola" && (language === "en" ? "Corporate Debt Structures, Local US-DRC Lending Syndication, Bilateral Joint Ventures." : "Structures de dette d'entreprise, syndication locale de prêts US-RDC, coentreprises bilatérales.")}
-                          {selectedLeader.name === "Carole Boboy" && (language === "en" ? "DRC Administrative Audits, Mineral Sourcing Compliance, Study Abroad Logistics Sourcing." : "Audits administratifs en RDC, conformité de l'approvisionnement en minerais, logistique d'études à l'étranger.")}
-                          {selectedLeader.name === "Laetitia Kalala" && (language === "en" ? "Tax Compliance, Treasury Allocations, Profit Margin Formula Adjustments." : "Conformité fiscale, allocations de trésorerie, ajustements de formule de marge bénéficiaire.")}
+                          {getPortfolios(selectedLeader.name)}
                         </p>
                       </div>
                     </div>
@@ -221,11 +218,42 @@ export default function ExecutiveTeam() {
                   </div>
                 </div>
 
+                {/* Contact and Location Details (Especially for Arsene Mulolo Mulapia) */}
+                {isArsene && (
+                  <div className="pt-6 border-t border-slate-100 space-y-3 font-sans text-xs">
+                    <h4 className="text-xs uppercase font-mono tracking-widest text-slate-400 font-bold mb-1">
+                      {language === "en" ? "Global Direct Access Contacts" : "Contacts Directs d'Accès Globaux"}
+                    </h4>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 font-mono text-[11px] text-slate-600">
+                      <div className="flex items-center gap-2">
+                        <Phone className="w-3.5 h-3.5 text-blue-600 shrink-0" />
+                        <span>+90 533 838 4684 (Turkey)</span>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <Phone className="w-3.5 h-3.5 text-blue-600 shrink-0" />
+                        <span>+243 832 298 734 (DRC)</span>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <Phone className="w-3.5 h-3.5 text-blue-600 shrink-0" />
+                        <span>US Office: +1 682 424 5857</span>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <Phone className="w-3.5 h-3.5 text-blue-600 shrink-0" />
+                        <span>Congo Office: +243 826 778 267</span>
+                      </div>
+                      <div className="flex items-center gap-2 col-span-1 sm:col-span-2">
+                        <Mail className="w-3.5 h-3.5 text-blue-600 shrink-0" />
+                        <span>Email: arsene.mulolo@pesagroup.org | infos@pesagroup.org</span>
+                      </div>
+                    </div>
+                  </div>
+                )}
+
                 {/* Contact and LinkedIn Link */}
                 <div className="pt-6 border-t border-slate-100 flex flex-wrap items-center justify-between gap-4">
                   <div className="flex items-center gap-1.5 text-xs text-slate-500 font-mono">
                     <Mail className="w-4 h-4 text-blue-600" />
-                    <span>info@pesagroup.org</span>
+                    <span>{isArsene ? "arsene.mulolo@pesagroup.org" : "info@pesagroup.org"}</span>
                   </div>
 
                   <a 

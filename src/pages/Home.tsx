@@ -3,10 +3,11 @@ import {
   Compass, Cpu, RefreshCw, Users, Briefcase, Layers, Zap, BarChart3, 
   Shield, TrendingUp, GraduationCap, Landmark, Building, Globe, 
   ArrowRight, CheckCircle, ChevronLeft, ChevronRight, Award, 
-  Clock, ShieldAlert, Star, Mail, ArrowUpRight, Check
+  Clock, ShieldAlert, Star, Mail, ArrowUpRight, Check, MapPin, Home as HomeIcon
 } from "lucide-react";
 import { servicesDetailList } from "../servicesData";
 import { useLanguage } from "../context/LanguageContext";
+import { propertiesData, landListingsData } from "../data";
 
 interface HomeProps {
   onNavigate: (path: string) => void;
@@ -24,19 +25,19 @@ export default function Home({ onNavigate }: HomeProps) {
 
   // 1. Dynamic rotating carousel for partners, events, etc.
   const carouselItems = language === "en" ? [
-    { type: "Client Partner", name: "Apex Global Holdings", logoText: "AGH", detail: "Strategic consulting alignment on cross-border operations." },
-    { type: "Key Event", name: "Dallas Business Summit 2026", logoText: "DBS", detail: "Keynote presentation on sustainable energy partnerships." },
-    { type: "Global Conference", name: "DRC Economic Forum", logoText: "DEF", detail: "Ethical mining and minerals trade logistics workshop." },
-    { type: "Community Project", name: "PESA Education Initiative", logoText: "PEI", detail: "Empowering 50+ local scholars with US study pathways." },
-    { type: "Client Partner", name: "Vanguard Development Group", logoText: "VDG", detail: "Advisory on luxury mixed-use commercial land development." },
-    { type: "International Alliance", name: "Sub-Saharan Trade Council", logoText: "SSTC", detail: "Structuring bilateral commodity exchange agreements." }
+    { type: "Client Partner", name: "Dangote Industries Limited", logoText: "DIL", detail: "Strategic alignment on heavy industries, supply chain audit, and trade logistics." },
+    { type: "Strategic Client", name: "Adé Brunch", logoText: "ADE", detail: "Strategic advisory on luxury hospitality expansion and cross-border operations." },
+    { type: "Academic Partner", name: "KCA (Kuwaha Cloud Academy)", logoText: "KCA", detail: "Formulating technical capacity building and academic visa workflows." },
+    { type: "Sovereign Utility", name: "SNEL", logoText: "SNEL", detail: "Operational audits on power grid distribution and sustainable energy systems." },
+    { type: "Real Estate Alliance", name: "Competitive Edge Realty", logoText: "CER", detail: "Brokerage cooperation on high-value Texas residential listings." },
+    { type: "Technology Partner", name: "SFM Technology", logoText: "SFM", detail: "Implementing secure enterprise infrastructure and digital transformations." }
   ] : [
-    { type: "Partenaire Client", name: "Apex Global Holdings", logoText: "AGH", detail: "Alignement du conseil stratégique sur les opérations transfrontalières." },
-    { type: "Événement Majeur", name: "Sommet des Affaires de Dallas 2026", logoText: "SAD", detail: "Présentation principale sur les partenariats énergétiques durables." },
-    { type: "Conférence Mondiale", name: "Forum Économique de la RDC", logoText: "DEF", detail: "Atelier sur l'exploitation minière éthique et la logistique du commerce des minerais." },
-    { type: "Projet Communautaire", name: "Initiative PESA Éducation", logoText: "PEI", detail: "Autonomisation de plus de 50 universitaires locaux avec des parcours d'études américains." },
-    { type: "Partenaire Client", name: "Vanguard Development Group", logoText: "VDG", detail: "Conseil en aménagement de terrains commerciaux de luxe à usage mixte." },
-    { type: "Alliance Internationale", name: "Conseil du Commerce Subsaharien", logoText: "SSTC", detail: "Structuration d'accords bilatéraux d'échange de matières premières." }
+    { type: "Partenaire Client", name: "Dangote Industries Limited", logoText: "DIL", detail: "Alignement stratégique sur les industries lourdes, l'audit et la logistique." },
+    { type: "Client Stratégique", name: "Adé Brunch", logoText: "ADE", detail: "Conseil stratégique sur l'expansion hôtelière de luxe et les opérations." },
+    { type: "Partenaire Académique", name: "KCA (Kuwaha Cloud Academy)", logoText: "KCA", detail: "Formulation de programmes de formation technique et visas d'études." },
+    { type: "Utilitaire Souverain", name: "SNEL", logoText: "SNEL", detail: "Audits opérationnels sur les réseaux électriques et l'énergie durable." },
+    { type: "Alliance Immobilière", name: "Competitive Edge Realty", logoText: "CER", detail: "Coopération de courtage sur les propriétés résidentielles de luxe." },
+    { type: "Partenaire Technologique", name: "SFM Technology", logoText: "SFM", detail: "Déploiement d'infrastructures sécurisées et transformation digitale." }
   ];
 
   useEffect(() => {
@@ -261,20 +262,20 @@ export default function Home({ onNavigate }: HomeProps) {
             </p>
 
             {/* Official Brochure Branding: PESA Framework */}
-            <div className="max-w-4xl mx-auto mb-10 p-6 sm:p-8 bg-slate-900/40 rounded-2xl border border-slate-800/80 text-center backdrop-blur-md animate-fade-in" id="pesa-acronym-showcase">
-              <h4 className="text-xs sm:text-sm font-mono uppercase tracking-[0.2em] text-blue-400 font-extrabold mb-6 text-center">
+            <div className="max-w-4xl mx-auto mb-10 p-6 sm:p-8 bg-blue-900/10 rounded-2xl border border-blue-500/20 text-center backdrop-blur-md animate-fade-in" id="pesa-acronym-showcase">
+              <h4 className="text-xs sm:text-[13px] font-mono uppercase tracking-[0.2em] text-blue-400 font-extrabold mb-6 text-center">
                 PESA PHILOSOPHY: PURPOSE • EXPANSION • STRUCTURE • ASSEMBLY
               </h4>
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 text-slate-100">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 text-white">
                 {/* Card P */}
-                <div className="bg-[#050e1e]/90 hover:bg-[#08152e] border border-blue-900/30 hover:border-blue-500/40 p-5 rounded-xl transition-all duration-300 text-center flex flex-col justify-center items-center min-h-[140px] shadow-lg hover:shadow-blue-950/20">
-                  <span className="text-xs sm:text-sm font-mono font-extrabold text-blue-400 uppercase tracking-widest block">
+                <div className="bg-gradient-to-b from-blue-600 to-blue-700 border border-blue-400 p-5 rounded-xl transition-all duration-300 text-center flex flex-col justify-center items-center min-h-[140px] shadow-lg hover:scale-102 hover:shadow-blue-500/30">
+                  <span className="text-xs sm:text-sm font-mono font-extrabold text-white uppercase tracking-widest block">
                     P • PURPOSE
                   </span>
-                  <span className="text-[10px] text-slate-400 font-mono block mt-1 uppercase tracking-wider">
+                  <span className="text-[10px] text-blue-100 font-mono block mt-1 uppercase tracking-wider">
                     {language === "fr" ? "Objectif" : "Purpose"}
                   </span>
-                  <p className="text-xs sm:text-[13px] text-slate-300 leading-relaxed font-sans mt-3 text-center px-1">
+                  <p className="text-xs sm:text-[13px] text-white font-sans mt-3 text-center px-1 font-medium leading-relaxed">
                     {language === "fr" 
                       ? "Nous donnons un sens stratégique à chaque projet." 
                       : "We provide a strategic purpose and direction to every project."}
@@ -282,14 +283,14 @@ export default function Home({ onNavigate }: HomeProps) {
                 </div>
 
                 {/* Card E */}
-                <div className="bg-[#050e1e]/90 hover:bg-[#08152e] border border-blue-900/30 hover:border-blue-500/40 p-5 rounded-xl transition-all duration-300 text-center flex flex-col justify-center items-center min-h-[140px] shadow-lg hover:shadow-blue-950/20">
-                  <span className="text-xs sm:text-sm font-mono font-extrabold text-blue-400 uppercase tracking-widest block">
+                <div className="bg-gradient-to-b from-blue-600 to-blue-700 border border-blue-400 p-5 rounded-xl transition-all duration-300 text-center flex flex-col justify-center items-center min-h-[140px] shadow-lg hover:scale-102 hover:shadow-blue-500/30">
+                  <span className="text-xs sm:text-sm font-mono font-extrabold text-white uppercase tracking-widest block">
                     E • EXPANSION
                   </span>
-                  <span className="text-[10px] text-slate-400 font-mono block mt-1 uppercase tracking-wider">
+                  <span className="text-[10px] text-blue-100 font-mono block mt-1 uppercase tracking-wider">
                     {language === "fr" ? "Expansion" : "Expansion"}
                   </span>
-                  <p className="text-xs sm:text-[13px] text-slate-300 leading-relaxed font-sans mt-3 text-center px-1">
+                  <p className="text-xs sm:text-[13px] text-white font-sans mt-3 text-center px-1 font-medium leading-relaxed">
                     {language === "fr" 
                       ? "Nous favorisons la croissance durable et l'innovation." 
                       : "We foster sustainable growth and continuous innovation."}
@@ -297,14 +298,14 @@ export default function Home({ onNavigate }: HomeProps) {
                 </div>
 
                 {/* Card S */}
-                <div className="bg-[#050e1e]/90 hover:bg-[#08152e] border border-blue-900/30 hover:border-blue-500/40 p-5 rounded-xl transition-all duration-300 text-center flex flex-col justify-center items-center min-h-[140px] shadow-lg hover:shadow-blue-950/20">
-                  <span className="text-xs sm:text-sm font-mono font-extrabold text-blue-400 uppercase tracking-widest block">
+                <div className="bg-gradient-to-b from-blue-600 to-blue-700 border border-blue-400 p-5 rounded-xl transition-all duration-300 text-center flex flex-col justify-center items-center min-h-[140px] shadow-lg hover:scale-102 hover:shadow-blue-500/30">
+                  <span className="text-xs sm:text-sm font-mono font-extrabold text-white uppercase tracking-widest block">
                     S • STRUCTURE
                   </span>
-                  <span className="text-[10px] text-slate-400 font-mono block mt-1 uppercase tracking-wider">
+                  <span className="text-[10px] text-blue-100 font-mono block mt-1 uppercase tracking-wider">
                     {language === "fr" ? "Structure" : "Structure"}
                   </span>
-                  <p className="text-xs sm:text-[13px] text-slate-300 leading-relaxed font-sans mt-3 text-center px-1">
+                  <p className="text-xs sm:text-[13px] text-white font-sans mt-3 text-center px-1 font-medium leading-relaxed">
                     {language === "fr" 
                       ? "Nous mettons en place des bases solides et performantes." 
                       : "We establish robust, high-performance foundations."}
@@ -312,14 +313,14 @@ export default function Home({ onNavigate }: HomeProps) {
                 </div>
 
                 {/* Card A */}
-                <div className="bg-[#050e1e]/90 hover:bg-[#08152e] border border-blue-900/30 hover:border-blue-500/40 p-5 rounded-xl transition-all duration-300 text-center flex flex-col justify-center items-center min-h-[140px] shadow-lg hover:shadow-blue-950/20">
-                  <span className="text-xs sm:text-sm font-mono font-extrabold text-blue-400 uppercase tracking-widest block">
+                <div className="bg-gradient-to-b from-blue-600 to-blue-700 border border-blue-400 p-5 rounded-xl transition-all duration-300 text-center flex flex-col justify-center items-center min-h-[140px] shadow-lg hover:scale-102 hover:shadow-blue-500/30">
+                  <span className="text-xs sm:text-sm font-mono font-extrabold text-white uppercase tracking-widest block">
                     A • ASSEMBLY
                   </span>
-                  <span className="text-[10px] text-slate-400 font-mono block mt-1 uppercase tracking-wider">
+                  <span className="text-[10px] text-blue-100 font-mono block mt-1 uppercase tracking-wider">
                     {language === "fr" ? "Assemblage" : "Assembly"}
                   </span>
-                  <p className="text-xs sm:text-[13px] text-slate-300 leading-relaxed font-sans mt-3 text-center px-1">
+                  <p className="text-xs sm:text-[13px] text-white font-sans mt-3 text-center px-1 font-medium leading-relaxed">
                     {language === "fr" 
                       ? "Nous coordonnons les ressources pour un impact maximal." 
                       : "We coordinate resources for maximum global impact."}
@@ -553,6 +554,157 @@ export default function Home({ onNavigate }: HomeProps) {
         </div>
       </section>
 
+      {/* ================= FEATURED REAL ESTATE & ACREAGE SECTION ================= */}
+      <section className="py-24 bg-slate-50 border-t border-b border-slate-200/60" id="featured-realty">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          
+          <div className="text-center max-w-3xl mx-auto mb-16 space-y-3">
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-blue-50 text-blue-700 border border-blue-200 text-[10px] font-mono uppercase tracking-widest font-extrabold">
+              <HomeIcon className="w-3.5 h-3.5" />
+              <span>Somptueux Realty LLC</span>
+            </div>
+            <h2 className="font-sans text-3xl sm:text-4xl text-slate-900 font-extrabold tracking-tight">
+              {language === "en" ? "Featured Real Estate & Acreage" : "Immobilier de Prestige & Terrains"}
+            </h2>
+            <p className="text-slate-500 text-xs sm:text-sm leading-relaxed font-sans max-w-2xl mx-auto">
+              {language === "en"
+                ? "View high-value properties and strategic development lands managed by our certified elite brokers under President Camy Likobe."
+                : "Découvrez des propriétés de prestige et des terrains de développement stratégiques gérés par nos courtiers d'élite certifiés sous la direction du Président Camy Likobe."
+              }
+            </p>
+            <div className="w-12 h-[1.5px] bg-blue-600 mx-auto mt-4"></div>
+          </div>
+
+          {/* Properties Grid */}
+          <div className="space-y-12">
+            <div>
+              <h3 className="text-xs font-mono uppercase tracking-widest text-slate-400 mb-6 font-bold border-b border-slate-200 pb-2 flex items-center gap-2">
+                <span className="w-1.5 h-1.5 rounded-full bg-blue-600"></span>
+                {language === "en" ? "Featured Luxury Properties" : "Propriétés de Luxe Sélectionnées"}
+              </h3>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                {propertiesData.filter(p => p.featured).slice(0, 3).map((property) => (
+                  <div 
+                    key={property.id}
+                    className="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden hover:shadow-md hover:border-blue-400 transition-all duration-300 flex flex-col justify-between group animate-fade-in"
+                    id={`home-property-card-${property.id}`}
+                  >
+                    <div>
+                      <div className="relative h-56 overflow-hidden">
+                        <img 
+                          src={property.image} 
+                          alt={property.title} 
+                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                        />
+                        <div className="absolute top-4 right-4 bg-blue-600 text-white font-mono text-xs font-extrabold px-3 py-1.5 rounded shadow-md border border-blue-500">
+                          {property.price}
+                        </div>
+                      </div>
+                      <div className="p-6 space-y-3">
+                        <h4 className="font-sans text-sm font-bold text-slate-950 group-hover:text-blue-600 transition-colors">
+                          {property.title}
+                        </h4>
+                        <p className="text-xs text-slate-500 flex items-start gap-1.5 font-sans leading-normal">
+                          <MapPin className="w-3.5 h-3.5 text-blue-500 shrink-0 mt-0.5" />
+                          <span>{property.address}</span>
+                        </p>
+                        <div className="grid grid-cols-3 gap-2 pt-2 border-t border-slate-100 text-[11px] font-mono text-slate-500">
+                          <div className="text-center bg-slate-50 py-1.5 rounded">
+                            <span className="font-extrabold text-slate-800 block">{property.beds}</span>
+                            <span>{language === "en" ? "Beds" : "Lits"}</span>
+                          </div>
+                          <div className="text-center bg-slate-50 py-1.5 rounded">
+                            <span className="font-extrabold text-slate-800 block">{property.baths}</span>
+                            <span>{language === "en" ? "Baths" : "Bains"}</span>
+                          </div>
+                          <div className="text-center bg-slate-50 py-1.5 rounded">
+                            <span className="font-extrabold text-slate-800 block">{property.sqft}</span>
+                            <span>{language === "en" ? "SqFt" : "SqFt"}</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="px-6 pb-6 pt-2">
+                      <button 
+                        onClick={() => onNavigate("/realty")}
+                        className="w-full py-2 bg-slate-900 hover:bg-blue-600 text-white text-xs font-sans font-bold uppercase tracking-widest rounded transition-colors flex items-center justify-center gap-1.5 group-hover:bg-blue-600"
+                      >
+                        <span>{language === "en" ? "Inquire Now" : "S'informer"}</span>
+                        <ArrowUpRight className="w-3.5 h-3.5" />
+                      </button>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div>
+              <h3 className="text-xs font-mono uppercase tracking-widest text-slate-400 mb-6 font-bold border-b border-slate-200 pb-2 flex items-center gap-2">
+                <span className="w-1.5 h-1.5 rounded-full bg-blue-600"></span>
+                {language === "en" ? "Strategic Development Lands" : "Terrains de Développement Stratégiques"}
+              </h3>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                {landListingsData.slice(0, 2).map((land) => (
+                  <div 
+                    key={land.id}
+                    className="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden hover:shadow-md hover:border-blue-400 transition-all duration-300 flex flex-col sm:flex-row group animate-fade-in"
+                    id={`home-land-card-${land.id}`}
+                  >
+                    <div className="relative h-48 sm:h-auto sm:w-2/5 overflow-hidden shrink-0">
+                      <img 
+                        src={land.image} 
+                        alt={land.title} 
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                      />
+                      <div className="absolute top-4 left-4 bg-emerald-600 text-white font-mono text-[10px] font-extrabold px-2.5 py-1 rounded shadow-md border border-emerald-500">
+                        {land.acres}
+                      </div>
+                    </div>
+                    <div className="p-6 flex flex-col justify-between flex-1">
+                      <div className="space-y-2">
+                        <div className="flex items-start justify-between gap-2">
+                          <h4 className="font-sans text-sm font-bold text-slate-950 group-hover:text-blue-600 transition-colors">
+                            {land.title}
+                          </h4>
+                          <span className="text-xs font-mono font-extrabold text-blue-600">{land.price}</span>
+                        </div>
+                        <p className="text-xs text-slate-500 flex items-start gap-1.5 font-sans leading-normal">
+                          <MapPin className="w-3.5 h-3.5 text-blue-500 shrink-0 mt-0.5" />
+                          <span>{land.location}</span>
+                        </p>
+                        <p className="text-xs text-slate-500 line-clamp-2 leading-relaxed font-sans pt-1">
+                          {land.description}
+                        </p>
+                      </div>
+                      <div className="pt-4 border-t border-slate-100 mt-4">
+                        <button 
+                          onClick={() => onNavigate("/realty")}
+                          className="text-xs font-sans font-bold text-blue-600 hover:text-blue-700 flex items-center gap-1"
+                        >
+                          <span>{language === "en" ? "View Land Details" : "Détails du Terrain"}</span>
+                          <ArrowRight className="w-3.5 h-3.5" />
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          <div className="text-center pt-12">
+            <button 
+              onClick={() => onNavigate("/realty")}
+              className="px-8 py-3.5 bg-[#0A2540] hover:bg-blue-600 text-white text-xs font-sans font-extrabold uppercase tracking-widest rounded-lg shadow-md transition-all duration-300 inline-flex items-center gap-2"
+            >
+              <span>{language === "en" ? "Explore Full Realty Portfolio" : "Explorer le Portefeuille Immobilier"}</span>
+              <ArrowRight className="w-4 h-4" />
+            </button>
+          </div>
+
+        </div>
+      </section>
+
       {/* ================= WHY CHOOSE PESA (STATS) ================= */}
       <section className="py-24 bg-[#0A2540] text-white relative overflow-hidden" id="why-choose-pesa">
         <div className="absolute inset-0 bg-radial from-slate-900 via-transparent to-transparent pointer-events-none opacity-50"></div>
@@ -647,10 +799,10 @@ export default function Home({ onNavigate }: HomeProps) {
           
           <div className="max-w-3xl mx-auto mb-16">
             <p className="text-xs font-mono uppercase tracking-widest text-blue-600 mb-2 font-bold">
-              Client Feedback
+              {language === "en" ? "Client Feedback" : "Retours Clients"}
             </p>
             <h2 className="font-sans text-3xl sm:text-4xl text-slate-900 font-extrabold tracking-tight">
-              Testimonials From Global Leaders
+              {language === "en" ? "Testimonials From Global Leaders" : "Témoignages de Dirigeants Mondiaux"}
             </h2>
             <div className="w-12 h-[1.5px] bg-blue-600 mx-auto mt-4"></div>
           </div>
