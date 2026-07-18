@@ -1,7 +1,9 @@
 import { useState, useRef } from "react";
 import { ArrowRight, Sparkles, Building, Globe, Landmark, Volume2, VolumeX } from "lucide-react";
+import { useLanguage } from "../context/LanguageContext";
 
 export default function Hero() {
+  const { language } = useLanguage();
   const [isMuted, setIsMuted] = useState(true);
   const videoRef = useRef<HTMLVideoElement>(null);
 
@@ -107,30 +109,69 @@ export default function Hero() {
           </p>
 
           {/* Official Brochure Branding: PESA Framework */}
-          <div className="max-w-4xl mx-auto mb-12 p-5 bg-slate-900/40 rounded-2xl border border-slate-800/80 text-left sm:text-center backdrop-blur-md animate-fade-in" id="pesa-acronym-showcase">
-            <h4 className="text-xs font-mono uppercase tracking-widest text-blue-400 font-extrabold mb-4 sm:text-center">
+          <div className="max-w-4xl mx-auto mb-12 p-6 sm:p-8 bg-slate-900/40 rounded-2xl border border-slate-800/80 text-center backdrop-blur-md animate-fade-in" id="pesa-acronym-showcase">
+            <h4 className="text-xs sm:text-sm font-mono uppercase tracking-[0.2em] text-blue-400 font-extrabold mb-6 text-center">
               PESA Philosophy: Purpose • Expansion • Structure • Assembly
             </h4>
-            <div className="grid grid-cols-1 sm:grid-cols-4 gap-4 text-slate-100">
-              <div className="space-y-1 p-3 bg-slate-950/60 rounded-xl border border-slate-800/50 shadow-xs backdrop-blur-sm">
-                <span className="text-xs font-mono font-extrabold text-blue-400 uppercase tracking-wider block">P • Purpose</span>
-                <span className="text-[10px] text-slate-400 font-mono block mb-1">Objectif</span>
-                <p className="text-xs text-slate-300 leading-snug font-sans">Nous donnons un sens stratégique à chaque projet.</p>
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-4 text-slate-100">
+              {/* Card P */}
+              <div className="bg-[#050e1e]/90 hover:bg-[#08152e] border border-blue-900/30 hover:border-blue-500/40 p-5 rounded-xl transition-all duration-300 text-center flex flex-col justify-center items-center min-h-[140px] shadow-lg hover:shadow-blue-950/20">
+                <span className="text-xs sm:text-sm font-mono font-extrabold text-blue-400 uppercase tracking-widest block">
+                  P • PURPOSE
+                </span>
+                <span className="text-[10px] text-slate-400 font-mono block mt-1 uppercase tracking-wider">
+                  {language === "fr" ? "Objectif" : "Purpose"}
+                </span>
+                <p className="text-xs sm:text-[13px] text-slate-300 leading-relaxed font-sans mt-3 text-center px-1">
+                  {language === "fr" 
+                    ? "Nous donnons un sens stratégique à chaque projet." 
+                    : "We provide a strategic purpose and direction to every project."}
+                </p>
               </div>
-              <div className="space-y-1 p-3 bg-slate-950/60 rounded-xl border border-slate-800/50 shadow-xs backdrop-blur-sm">
-                <span className="text-xs font-mono font-extrabold text-blue-400 uppercase tracking-wider block">E • Expansion</span>
-                <span className="text-[10px] text-slate-400 font-mono block mb-1">Expansion</span>
-                <p className="text-xs text-slate-300 leading-snug font-sans">Nous favorisons la croissance durable et l'innovation.</p>
+
+              {/* Card E */}
+              <div className="bg-[#050e1e]/90 hover:bg-[#08152e] border border-blue-900/30 hover:border-blue-500/40 p-5 rounded-xl transition-all duration-300 text-center flex flex-col justify-center items-center min-h-[140px] shadow-lg hover:shadow-blue-950/20">
+                <span className="text-xs sm:text-sm font-mono font-extrabold text-blue-400 uppercase tracking-widest block">
+                  E • EXPANSION
+                </span>
+                <span className="text-[10px] text-slate-400 font-mono block mt-1 uppercase tracking-wider">
+                  {language === "fr" ? "Expansion" : "Expansion"}
+                </span>
+                <p className="text-xs sm:text-[13px] text-slate-300 leading-relaxed font-sans mt-3 text-center px-1">
+                  {language === "fr" 
+                    ? "Nous favorisons la croissance durable et l'innovation." 
+                    : "We foster sustainable growth and continuous innovation."}
+                </p>
               </div>
-              <div className="space-y-1 p-3 bg-slate-950/60 rounded-xl border border-slate-800/50 shadow-xs backdrop-blur-sm">
-                <span className="text-xs font-mono font-extrabold text-blue-400 uppercase tracking-wider block">S • Structure</span>
-                <span className="text-[10px] text-slate-400 font-mono block mb-1">Structure</span>
-                <p className="text-xs text-slate-300 leading-snug font-sans">Nous mettons en place des bases solides et performantes.</p>
+
+              {/* Card S */}
+              <div className="bg-[#050e1e]/90 hover:bg-[#08152e] border border-blue-900/30 hover:border-blue-500/40 p-5 rounded-xl transition-all duration-300 text-center flex flex-col justify-center items-center min-h-[140px] shadow-lg hover:shadow-blue-950/20">
+                <span className="text-xs sm:text-sm font-mono font-extrabold text-blue-400 uppercase tracking-widest block">
+                  S • STRUCTURE
+                </span>
+                <span className="text-[10px] text-slate-400 font-mono block mt-1 uppercase tracking-wider">
+                  {language === "fr" ? "Structure" : "Structure"}
+                </span>
+                <p className="text-xs sm:text-[13px] text-slate-300 leading-relaxed font-sans mt-3 text-center px-1">
+                  {language === "fr" 
+                    ? "Nous mettons en place des bases solides et performantes." 
+                    : "We establish robust, high-performance foundations."}
+                </p>
               </div>
-              <div className="space-y-1 p-3 bg-slate-950/60 rounded-xl border border-slate-800/50 shadow-xs backdrop-blur-sm">
-                <span className="text-xs font-mono font-extrabold text-blue-400 uppercase tracking-wider block">A • Assembly</span>
-                <span className="text-[10px] text-slate-400 font-mono block mb-1">Assemblage</span>
-                <p className="text-xs text-slate-300 leading-snug font-sans">Nous coordonnons les ressources pour un impact maximal.</p>
+
+              {/* Card A */}
+              <div className="bg-[#050e1e]/90 hover:bg-[#08152e] border border-blue-900/30 hover:border-blue-500/40 p-5 rounded-xl transition-all duration-300 text-center flex flex-col justify-center items-center min-h-[140px] shadow-lg hover:shadow-blue-950/20">
+                <span className="text-xs sm:text-sm font-mono font-extrabold text-blue-400 uppercase tracking-widest block">
+                  A • ASSEMBLY
+                </span>
+                <span className="text-[10px] text-slate-400 font-mono block mt-1 uppercase tracking-wider">
+                  {language === "fr" ? "Assemblage" : "Assembly"}
+                </span>
+                <p className="text-xs sm:text-[13px] text-slate-300 leading-relaxed font-sans mt-3 text-center px-1">
+                  {language === "fr" 
+                    ? "Nous coordonnons les ressources pour un impact maximal." 
+                    : "We coordinate resources for maximum global impact."}
+                </p>
               </div>
             </div>
           </div>

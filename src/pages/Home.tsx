@@ -238,13 +238,13 @@ export default function Home({ onNavigate }: HomeProps) {
             >
               {language === "en" ? (
                 <>
-                  Transforming Organizations <br />
-                  Through <span className="text-blue-400 font-black">Strategy, Technology & People</span>
+                  We Provide <span className="text-blue-400 font-black">Real Solutions</span> <br className="hidden sm:inline" />
+                  for Real People
                 </>
               ) : (
                 <>
-                  Transformer les Organisations <br />
-                  Par la <span className="text-blue-400 font-black">Stratégie, Technologie & l'Humain</span>
+                  Nous Apportons des <span className="text-blue-400 font-black">Solutions Réelles</span> <br className="hidden sm:inline" />
+                  pour de Vraies Personnes
                 </>
               )}
             </h1>
@@ -253,8 +253,80 @@ export default function Home({ onNavigate }: HomeProps) {
               className="text-slate-100 text-sm sm:text-base md:text-lg max-w-2xl mx-auto mb-10 leading-relaxed font-sans font-medium"
               style={{ textShadow: "0 2px 6px rgba(0,0,0,0.95)" }}
             >
-              {t("We solve complex challenges and elevate global performance. Fully customized consulting divisions delivering operational rigor, technical modernization, global recruitment strategies, and executive transformation models.")}
+              {language === "en" ? (
+                "A diversified multi-national corporation and elite advisory firm. Under President Camy Likobe, we deliver strategic consulting, luxury real estate brokerage, sustainable construction, private jet procurement, international student visas, and ethical mining logistics."
+              ) : (
+                "Une multinationale diversifiée et un cabinet de conseil d'élite. Sous la direction du Président Camy Likobe, nous offrons des services de conseil stratégique, de courtage immobilier de luxe, de construction durable, d'approvisionnement en jets privés, de visas d'études internationaux et de logistique minière éthique."
+              )}
             </p>
+
+            {/* Official Brochure Branding: PESA Framework */}
+            <div className="max-w-4xl mx-auto mb-10 p-6 sm:p-8 bg-slate-900/40 rounded-2xl border border-slate-800/80 text-center backdrop-blur-md animate-fade-in" id="pesa-acronym-showcase">
+              <h4 className="text-xs sm:text-sm font-mono uppercase tracking-[0.2em] text-blue-400 font-extrabold mb-6 text-center">
+                PESA PHILOSOPHY: PURPOSE • EXPANSION • STRUCTURE • ASSEMBLY
+              </h4>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 text-slate-100">
+                {/* Card P */}
+                <div className="bg-[#050e1e]/90 hover:bg-[#08152e] border border-blue-900/30 hover:border-blue-500/40 p-5 rounded-xl transition-all duration-300 text-center flex flex-col justify-center items-center min-h-[140px] shadow-lg hover:shadow-blue-950/20">
+                  <span className="text-xs sm:text-sm font-mono font-extrabold text-blue-400 uppercase tracking-widest block">
+                    P • PURPOSE
+                  </span>
+                  <span className="text-[10px] text-slate-400 font-mono block mt-1 uppercase tracking-wider">
+                    {language === "fr" ? "Objectif" : "Purpose"}
+                  </span>
+                  <p className="text-xs sm:text-[13px] text-slate-300 leading-relaxed font-sans mt-3 text-center px-1">
+                    {language === "fr" 
+                      ? "Nous donnons un sens stratégique à chaque projet." 
+                      : "We provide a strategic purpose and direction to every project."}
+                  </p>
+                </div>
+
+                {/* Card E */}
+                <div className="bg-[#050e1e]/90 hover:bg-[#08152e] border border-blue-900/30 hover:border-blue-500/40 p-5 rounded-xl transition-all duration-300 text-center flex flex-col justify-center items-center min-h-[140px] shadow-lg hover:shadow-blue-950/20">
+                  <span className="text-xs sm:text-sm font-mono font-extrabold text-blue-400 uppercase tracking-widest block">
+                    E • EXPANSION
+                  </span>
+                  <span className="text-[10px] text-slate-400 font-mono block mt-1 uppercase tracking-wider">
+                    {language === "fr" ? "Expansion" : "Expansion"}
+                  </span>
+                  <p className="text-xs sm:text-[13px] text-slate-300 leading-relaxed font-sans mt-3 text-center px-1">
+                    {language === "fr" 
+                      ? "Nous favorisons la croissance durable et l'innovation." 
+                      : "We foster sustainable growth and continuous innovation."}
+                  </p>
+                </div>
+
+                {/* Card S */}
+                <div className="bg-[#050e1e]/90 hover:bg-[#08152e] border border-blue-900/30 hover:border-blue-500/40 p-5 rounded-xl transition-all duration-300 text-center flex flex-col justify-center items-center min-h-[140px] shadow-lg hover:shadow-blue-950/20">
+                  <span className="text-xs sm:text-sm font-mono font-extrabold text-blue-400 uppercase tracking-widest block">
+                    S • STRUCTURE
+                  </span>
+                  <span className="text-[10px] text-slate-400 font-mono block mt-1 uppercase tracking-wider">
+                    {language === "fr" ? "Structure" : "Structure"}
+                  </span>
+                  <p className="text-xs sm:text-[13px] text-slate-300 leading-relaxed font-sans mt-3 text-center px-1">
+                    {language === "fr" 
+                      ? "Nous mettons en place des bases solides et performantes." 
+                      : "We establish robust, high-performance foundations."}
+                  </p>
+                </div>
+
+                {/* Card A */}
+                <div className="bg-[#050e1e]/90 hover:bg-[#08152e] border border-blue-900/30 hover:border-blue-500/40 p-5 rounded-xl transition-all duration-300 text-center flex flex-col justify-center items-center min-h-[140px] shadow-lg hover:shadow-blue-950/20">
+                  <span className="text-xs sm:text-sm font-mono font-extrabold text-blue-400 uppercase tracking-widest block">
+                    A • ASSEMBLY
+                  </span>
+                  <span className="text-[10px] text-slate-400 font-mono block mt-1 uppercase tracking-wider">
+                    {language === "fr" ? "Assemblage" : "Assembly"}
+                  </span>
+                  <p className="text-xs sm:text-[13px] text-slate-300 leading-relaxed font-sans mt-3 text-center px-1">
+                    {language === "fr" 
+                      ? "Nous coordonnons les ressources pour un impact maximal." 
+                      : "We coordinate resources for maximum global impact."}
+                  </p>
+                </div>
+              </div>
+            </div>
 
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <button
